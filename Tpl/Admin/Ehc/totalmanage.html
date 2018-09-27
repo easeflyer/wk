@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>总量管理</title>
+<include file="Common:miniheader"/>
+<link rel="stylesheet" type="text/css" href="__SKIN__css/tableform.css" />
+</head>
+<body>
+<div  class="easyui-panel" data-options="
+	title:'总量管理',
+	border:false,
+	iconCls:'icon-vcard_add'
+">
+<form name="f1" action="" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="id" value="{$data[id]}" />
+<table class="table-form" border="1" width="100%">
+	<tr>
+		<th>矿机总数</th><td><input disabled type="text" name="mtotal" class="ipt" value="{$data[mtotal]}"></td>
+	</tr>
+	<tr>
+		<th>矿机增量</th><td><input type="text" name="mt_add" class="ipt" value="{$data[mt_add]}"> 总量+增量=页面显示的总量</td>
+	</tr>
+	<tr>
+		<th>总产量</th><td><input disabled type="text" name="ehctotal" class="ipt" value="{$data[ehctotal]}"></td>
+	</tr>
+	<tr>
+		<th>总产量增量</th><td><input type="text" name="et_add" class="ipt" value="{$data[et_add]}"></td>
+	</tr>
+	<tr>
+		<th></th><td><input type="submit" name="s1" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" name="r1" value="清除"></td>
+	</tr>
+</table>
+
+</form>
+</div>
+</body>
+</html>

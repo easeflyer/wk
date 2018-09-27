@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><h1>测试操作1</h1>

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>实名认证审核</title>
+    <include file="Common:miniheader" />
+    <link rel="stylesheet" type="text/css" href="__SKIN__css/tableform.css" />
+    <script>
+        function op(id,state) {
+            $.post("{:U('Ehc/ckrname')}", { id: id, state: state },
+                function (data) {
+                    if(data)$("#op").html("<span style=\"color:green\">已认证</span>");
+                    else $("#op").html("<span style=\"color:red\">未通过</span>");
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="easyui-panel" data-options="
+	title:'实名',
+	border:false,
+	iconCls:'icon-vcard_add'
+">
+        <form name="f1" action="" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{$data[id]}" />
+            <table class="table-form" border="1" width="100%">
+                <tr>
+                    <th>真实姓名</th>
+                    <td>{$data[realname]}</td>
+                </tr>
+                <tr>
+                    <th>身份证号</th>
+                    <td>{$data[idnumber]}</td>
+                </tr>
+                <tr>
+                        <th>是否通过认证</th>
+                        <td>
+                            <div id="op">
+                                <if condition="$data[state] eq 0">
+                                    <input type="button" value="通过" onClick="op({$data[id]},2)" />
+                                    <input type="button" value="不通过" onClick="op({$data[id]},1)" />
+                                    <elseif condition="$data[state] eq 1" />
+                                    <span style="color:red">未通过</span>
+                                    <else />
+                                    <span style="color:green">已认证</span>
+                                </if>
+                            </div>
+                        </td>
+                    </tr>
+                <tr>
+                    <th>身份证正面</th>
+                    <td><img src="__PUBLIC__/idImages/{$data[idnumber]}-f.jpg" /></td>
+                </tr>
+                <tr>
+                    <th>身份证背面</th>
+                    <td><img src="__PUBLIC__/idImages/{$data[idnumber]}-b.jpg" /></td>
+                </tr>
+                <tr>
+                    <th>手持身份证</th>
+                    <td><img src="__PUBLIC__/idImages/{$data[idnumber]}-h.jpg" /></td>
+                </tr>
+
+
+            </table>
+
+        </form>
+    </div>
+</body>
+
+</html>
