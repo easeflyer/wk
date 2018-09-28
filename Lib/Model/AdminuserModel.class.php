@@ -88,6 +88,19 @@ class AdminuserModel extends RelationModel
         return $data;
     }
     /**
+     * 递归升级用户。
+     */
+    public function updateUser($uid){
+        $level = $this->ckUpdate($uid);
+        //echo $level;exit;
+        if($level){
+            $puid = M("usertree")->where("user_id={$uid}")->find()['parent_id'];
+            $this->where("id={$uid}")->save(Array('level'=>$level));
+            if($puid) $this->updateUser($puid);
+        }
+    }
+
+    /**
      * 判断一个用户是否可以升级。
      * 返回升级编号0-8
      */
@@ -97,7 +110,7 @@ class AdminuserModel extends RelationModel
         $data = $this->find($uid);
         $ehc = $data['amount'];
         $level = $data['level'];
-
+        //echo "level:{$level}\n";
         // 取出所有子用户的 level 前三合计
         $sql = "SELECT sum(au.level) as count FROM usertree as ut, adminuser as au " . 
                 "where ut.user_id=au.id and ut.parent_id={$uid} " .
@@ -106,6 +119,7 @@ class AdminuserModel extends RelationModel
         $data1 = $this->query($sql);
         //$sql = $this->getLastSql();
         $subSum = $data1[0]['count'];
+        //echo "subSum:{$subSum}\n";exit;
         //return $subSum;
         // 0 => 1
         if( $level==0 && 
@@ -113,11 +127,11 @@ class AdminuserModel extends RelationModel
             $data['amount']>99999) return 1;
         // 1 => 2
         if( $level==1 && 
-            $subSum = 1 && 
+            $subSum == 1 && 
             $data['amount']>99999) return 2;
         // 2 => 3
         if( $level==2 && 
-            $subSum = 2 && 
+            $subSum == 2 && 
             $data['amount']>99999) return 3;
         // if( $level==3 && 
         //     $subSum = 2 && 

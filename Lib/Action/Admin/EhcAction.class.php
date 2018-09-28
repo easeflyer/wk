@@ -14,10 +14,14 @@ class EhcAction extends CommonAction {
     //private $realname=array('未认证','已通过');
 
 
+    /**
+     * 此函数只是演示。功能已经完成。
+     */
     function ckUpdate(){
-        $uid = 3;
+        $uid = 39;
         $model = D('Adminuser');
-        print_r( $model->ckUpdate(3) );
+        $model->updateUser($uid);
+        echo 333;
     }
     /**
      * 矿机编辑
