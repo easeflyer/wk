@@ -7,6 +7,7 @@
     <script>
         // 用于测试消息 输出
         var msg = null;
+        var host = "http://192.168.0.10/"
         window.onload = function(){
             msg = document.querySelector("#msg");
         }
@@ -29,7 +30,7 @@
         };
 
         function noticelist(){
-            url = 'http://192.168.0.112/backend/index.php?g=Api&m=Notice&a=nlist';
+            url = host+'backend/index.php?g=Api&m=Notice&a=nlist';
             getData(url);
         }
 
@@ -47,7 +48,7 @@
                 'pwd':'admin',
                 'cpwd':'22222222'
             }
-            url = 'http://192.168.0.112/backend/index.php?g=Api&m=User&a=profile';
+            url = host+'backend/index.php?g=Api&m=User&a=profile';
             getData(url,json);
         }
         /**
@@ -56,7 +57,7 @@
 
         */
         function profile(){
-            url = 'http://192.168.0.112/backend/index.php?g=Api&m=User&a=profile';
+            url = host+'backend/index.php?g=Api&m=User&a=profile';
             getData(url);
 
         }
@@ -73,7 +74,7 @@
                  cpwd:'22222222',
                  smscode:'9999'
             }
-            url = 'http://192.168.0.112/backend/index.php?g=Api&m=Account&a=transfer';
+            url = host+'backend/index.php?g=Api&m=Account&a=transfer';
             getData(url,json)
         }
 
@@ -81,7 +82,7 @@
         个人账目
         */
         function acclist(){
-            url = 'http://192.168.0.112/backend/index.php?g=Api&m=Account&a=acclist';
+            url = host+'backend/index.php?g=Api&m=Account&a=acclist';
             getData(url);
         }
         /**
@@ -89,12 +90,12 @@
         */
         function relate(){
             json = { 'username': 'user1', 'pwd': '11111111','sms':9999 };
-            url = "http://192.168.0.112/backend/index.php?g=Api&m=User&a=relate"
+            url = host+"backend/index.php?g=Api&m=User&a=relate"
             getData(url,json);
         }
         // 关联矿机列表
         function relatelist(){
-            url = "http://192.168.0.112/backend/index.php?g=Api&m=User&a=relatelist"
+            url = host+"backend/index.php?g=Api&m=User&a=relatelist"
             getData(url);
         }
 
@@ -104,7 +105,7 @@
         */
         function login(){
             json = { 'username': 'admin', 'pwd': 'admin' };
-            url = "http://192.168.0.112/backend/index.php?g=Api&m=User&a=login";
+            url = host+"backend/index.php?g=Api&m=User&a=login";
             getData(url,json);
         }
 
@@ -112,7 +113,7 @@
         function cklogin(){
             json = {sid:session.get_sid()};
             //json = { 'username': 'admin', 'pwd': 'admin' };
-            fetch("http://192.168.0.112/backend/index.php?g=Api&m=User&a=cklogin", {
+            fetch(host+"backend/index.php?g=Api&m=User&a=cklogin", {
                 method: 'POST', 
                 body: JSON.stringify(json),
                 headers: new Headers({
@@ -137,7 +138,7 @@
                 email     :'3234@wer.com',
                 sms       :'9999' // 模拟短信 默认 9999
             };
-            url = "http://192.168.0.112/backend/index.php?g=Api&m=User&a=add"
+            url = host+"backend/index.php?g=Api&m=User&a=add"
             getData(url,json);           
         }
 
@@ -145,7 +146,7 @@
          * 发送短信接口
          */
         function sendsms(){
-            url = "http://192.168.0.112/backend/index.php?g=Api&m=Common&a=sendsms";
+            url = host+"backend/index.php?g=Api&m=Common&a=sendsms";
             getData(url);
         }
 
@@ -153,7 +154,7 @@
             系统概况 (已完成)
         */
         function sysinfo(){
-            url = "http://192.168.0.112/backend/index.php?g=Api&m=User&a=sysinfo";
+            url = host+"backend/index.php?g=Api&m=User&a=sysinfo";
             getData(url);
         }
 
@@ -172,7 +173,7 @@
         }
 
         function test1(){
-            fetch("http://192.168.0.112/backend/index.php?g=Api&m=User&a=re_total", {
+            fetch(host+"backend/index.php?g=Api&m=User&a=re_total", {
                 method: 'POST', 
                 //body: JSON.stringify(json),
                 headers: new Headers({
@@ -184,7 +185,6 @@
                     //session.set_sid(data.data.sid)
                     msg.innerHTML(data)
                 });
-
         }
     </script>
 

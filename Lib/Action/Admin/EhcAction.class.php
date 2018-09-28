@@ -7,25 +7,44 @@ class EhcAction extends CommonAction {
         4=>'四类矿机',
         5=>'五类矿机',
     );
-    private $level=array('Es1','Es2','Es3',
+    private $level=array('Es0','Es1','Es2','Es3',
                  'Cs1','Cs2','Cs3',
                  'Os1','Os2','Os3');
     private $state=array('停止','运行');
     //private $realname=array('未认证','已通过');
 
+
+    function ckUpdate(){
+        $uid = 3;
+        $model = D('Adminuser');
+        print_r( $model->ckUpdate(3) );
+    }
     /**
      * 矿机编辑
      */
     function useredit(){
         if($_POST){
+            $post = $_POST;
+            if(empty($_POST['pwd'])) unset($post['pwd']);
+            else $post['pwd'] = md5($post['pwd']);
+            if(empty($_POST['cpwd'])) unset($post['cpwd']);
+            else $post['cpwd'] = md5($post['cpwd']);
+            unset($post['username']);
 
+            $model = M('adminuser');
+            if($model->where("id='{$_POST['userid']}'")->save($post)){
+                $this->success('更新成功！');
+            }else{
+                echo $model->getLastSql();
+                $this->error('更新失败！');
+            }
         }else{
             $uid = $_GET['id'];
             $model = D('adminuser');
             $data = $model->find($uid);
             $this->assign('data',$data);
             $this->assign('type',$this->type);
-            $this->assign('level',$this-level);
+            $this->assign('level',$this->level);
             $this->display();
         }
     }
@@ -55,7 +74,7 @@ class EhcAction extends CommonAction {
             $this->success('删除成功');
         } else {
             echo $model->getLastSql();
-            $this->success('删除失败');
+            $this->error('删除失败');
         }
     }     
     /**

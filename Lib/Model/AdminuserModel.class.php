@@ -87,4 +87,50 @@ class AdminuserModel extends RelationModel
                 where("{$time}-createtime<{$week} and id in({$ids})")->find();
         return $data;
     }
+    /**
+     * 判断一个用户是否可以升级。
+     * 返回升级编号0-8
+     */
+    public function ckUpdate($uid){
+        //     4 5 6  7  8  9   对应的等级 合计
+        $ll = [5,6,9, 12,15,18];
+        $data = $this->find($uid);
+        $ehc = $data['amount'];
+        $level = $data['level'];
+
+        // 取出所有子用户的 level 前三合计
+        $sql = "SELECT sum(au.level) as count FROM usertree as ut, adminuser as au " . 
+                "where ut.user_id=au.id and ut.parent_id={$uid} " .
+                "order by au.level DESC LIMIT 0,3";
+
+        $data1 = $this->query($sql);
+        //$sql = $this->getLastSql();
+        $subSum = $data1[0]['count'];
+        //return $subSum;
+        // 0 => 1
+        if( $level==0 && 
+            $subSum < 1 && 
+            $data['amount']>99999) return 1;
+        // 1 => 2
+        if( $level==1 && 
+            $subSum = 1 && 
+            $data['amount']>99999) return 2;
+        // 2 => 3
+        if( $level==2 && 
+            $subSum = 2 && 
+            $data['amount']>99999) return 3;
+        // if( $level==3 && 
+        //     $subSum = 2 && 
+        //     $data['amount']>99999) return 3;
+
+        if($level > 2){
+            foreach($ll as $k=>$v){
+                if($subSum>$v) continue;
+                if($level == $k+4) return 0;
+                return $k+4;
+            }
+        }
+        return 0;
+    }
+
 }

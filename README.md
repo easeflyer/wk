@@ -53,3 +53,40 @@ jquery-easyui 的例子再看一下。
         个人资料：修改 登录密码 支付密码 其他都不能修改 展示包括实名
     实名认证：身份信息+三张图片上传 后台接收保存。等待审核
         矿协通知：构造数据即可
+
+
+奖励计算：
+
+    1、开通矿机的时候。 根据奖励进行计算。
+    2、每开通矿机 判断是否升级。
+    3、每此升级需要判断上级是否需要升级。
+
+    矿场奖励。
+
+
+function updateUser(u){
+    if(chk(u)){
+        u1 升级
+        updateUser(u1 父节点)
+    }
+}
+
+
+0-9  10个等级
+0级 初级。
+
+1    1 级  es1      
+2    2     2        1
+3    3     3        2
+4    c1    5        5
+5    c2    6        6
+6    c3    9        9
+7    o1    15       12
+8    o2    21       15
+9    o3    27       18
+
+
+SELECT ut.*,au.* FROM  usertree as ut  LEFT JOIN adminuser as au ON ut.user_id=au.id and ut.parent_id=3
+
+
+SELECT count(au.level) as count FROM usertree as ut, adminuser as au where ut.user_id=au.id and ut.parent_id=3 order by au.level DESC LIMIT 0,3

@@ -12,6 +12,21 @@ class UserAction extends Action
         return json_decode($GLOBALS['HTTP_RAW_POST_DATA'],true);
     }
 
+    function changeState(){
+        $post = $this->getPost();
+        $model = M('adminuser');
+        if($model->where("id={$post['id']}")->save($post)){
+            $re = array("state"=>'success','msg'=>'修改成功！','data'=>'');
+            echo json_encode($re);
+        }else{
+            $re = array("state"=>'error','msg'=>'修改失败！','data'=>'');
+            echo json_encode($re);
+        }
+    }
+
+    /**
+     * 显示、修改 个人资料
+     */
     function profile(){
         $uid = $_SESSION['userid'];
         $post = $this->getPost();
