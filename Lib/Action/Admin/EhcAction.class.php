@@ -13,15 +13,44 @@ class EhcAction extends CommonAction {
     private $state=array('停止','运行');
     //private $realname=array('未认证','已通过');
 
+    /**
+     * 每日产出发放。
+     */
+    function daylyOutput(){
+        $msg = "";
+
+        $model = new Model();
+
+        $model->startTrans();
+        $sql = "update adminuser a,ehclist e
+                set a.amount = a.amount + e.output + 100000
+                where a.type = e.id";
+        $numUpdate = $model->execute($sql);
+        if(!$numUpdate){
+            $this->error('挖矿奖励发放失败！');
+            $model->rollback();
+            return;
+        }
+        $msg .= "{$numUpdate}个用户挖矿奖励发放成功！<br />";
+        $_SESSION['msg'] = '';
+        $model = D("Adminuser");
+        $userlist = $model->field("id")->select();
+        foreach($userlist as $user){
+            $model->updateUser($user['id']);
+        }
+        $msg .= $_SESSION['msg'];
+        $model->commit();
+        echo $msg;
+        return;
+    }
 
     /**
      * 此函数只是演示。功能已经完成。
      */
     function ckUpdate(){
-        $uid = 39;
+        $uid = 17;
         $model = D('Adminuser');
-        $model->updateUser($uid);
-        echo 333;
+        echo $model->ckUpdate($uid);
     }
     /**
      * 矿机编辑

@@ -14,7 +14,9 @@ class AdminuserModel extends RelationModel
         array('pwd','/.{8,}/','密码至少8位',2,'regex'),
         array('repwd','pwd','密码与确认密码必须一致',0,'confirm')
     );
-
+    private $level=array('Es0','Es1','Es2','Es3',
+                 'Cs1','Cs2','Cs3',
+                 'Os1','Os2','Os3');
     // select sum(amount) from `adminuser`
     // where id in(SELECT id FROM `adminuser` WHERE id>10)
     // SELECT count(id) FROM `adminuser` WHERE id>10
@@ -91,11 +93,16 @@ class AdminuserModel extends RelationModel
      * 递归升级用户。
      */
     public function updateUser($uid){
+        echo "{$uid}--<br />";
         $level = $this->ckUpdate($uid);
         //echo $level;exit;
         if($level){
             $puid = M("usertree")->where("user_id={$uid}")->find()['parent_id'];
+            $data = $this->find($uid);
             $this->where("id={$uid}")->save(Array('level'=>$level));
+            $levelold = $this->level[$data['level']];
+            $levelnew = $this->level[$level];
+            $_SESSION['msg'] .= "{$data['username']} 从 {$levelold} 升级为 {$levelnew}<br />";
             if($puid) $this->updateUser($puid);
         }
     }
@@ -104,19 +111,18 @@ class AdminuserModel extends RelationModel
      * 判断一个用户是否可以升级。
      * 返回升级编号0-8
      */
-    public function ckUpdate($uid){
+    public function ckUpdate1($uid){
         //     4 5 6  7  8  9   对应的等级 合计
         $ll = [5,6,9, 12,15,18];
         $data = $this->find($uid);
         $ehc = $data['amount'];
         $level = $data['level'];
         //echo "level:{$level}\n";
-        // 取出所有子用户的 level 前三合计
+        // (废弃) 取出所有子用户的 level 前三合计
         $sql = "SELECT sum(au.level) as count FROM usertree as ut, adminuser as au " . 
                 "where ut.user_id=au.id and ut.parent_id={$uid} " .
                 "order by au.level DESC LIMIT 0,3";
 
-        $data1 = $this->query($sql);
         //$sql = $this->getLastSql();
         $subSum = $data1[0]['count'];
         //echo "subSum:{$subSum}\n";exit;
@@ -143,6 +149,47 @@ class AdminuserModel extends RelationModel
                 if($level == $k+4) return 0;
                 return $k+4;
             }
+        }
+        return 0;
+    }
+    public function ckUpdate($uid){
+        //     4 5 6  7  8  9   对应的等级 合计
+        $ll = [5,6,9, 12,15,18];
+        $data = $this->find($uid);
+        $ehc = $data['amount'];
+        $level = $data['level'];
+        //echo "level:{$level}\n";
+        $sql = "SELECT concat(au.level) as ll FROM usertree as ut, adminuser as au 
+                where ut.user_id=au.id and ut.parent_id={$uid} order by au.level DESC LIMIT 0,3";                
+
+        $data1 = $this->query($sql);
+        // function fun($v1,$v2){
+        //     return $v1.$v2['ll'];
+        // }
+        $lstr = array_reduce($data1,function($v1,$v2){return $v1.$v2['ll'];});
+        //return $lstr;
+        if( $level==0 && 
+            $lstr < "1" && 
+            $data['amount']>99999) return 1;
+        // 1 => 2
+        if( $level==1 && 
+            $lstr > "1" && 
+            $data['amount']>99999) return 2;
+        // 2 => 3
+        if( $level==2 && 
+            $lstr > "11" && 
+            $data['amount']>99999) return 3;
+        // if( $level==3 && 
+        //     $subSum = 2 && 
+        //     $data['amount']>99999) return 3;
+
+        switch($lstr){
+            case "311":return 4;
+            case "321":return 5;
+            case "333":return 6;
+            case "633":return 7;
+            case "663":return 8;
+            case "666":return 9;
         }
         return 0;
     }

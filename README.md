@@ -38,6 +38,7 @@ jquery-easyui 的例子再看一下。
         新建：用户资料，usertree
     账目列表
     矿机列表 编辑功能。
+    矿机总数 显示到后台，还没有做。    
 
     cron.php    定期发放奖励，处理其他必要的事项。
 
@@ -57,11 +58,14 @@ jquery-easyui 的例子再看一下。
 
 奖励计算：
 
-    1、开通矿机的时候。 根据奖励进行计算。
+    1、开通矿机的时候。 根据奖励进行计算。 
     2、每开通矿机 判断是否升级。
     3、每此升级需要判断上级是否需要升级。
+    4、转账的时候也要判断。
 
     矿场奖励。
+
+当前 每天一次升级。晚上进行。 因为升级消耗资源。
 
 
 function updateUser(u){
@@ -90,3 +94,16 @@ SELECT ut.*,au.* FROM  usertree as ut  LEFT JOIN adminuser as au ON ut.user_id=a
 
 
 SELECT count(au.level) as count FROM usertree as ut, adminuser as au where ut.user_id=au.id and ut.parent_id=3 order by au.level DESC LIMIT 0,3
+
+
+
+update adminuser
+set adminuser.amount = adminuser.amount+ehclist.output from adminuser, ehclist
+where adminuser.type=ehclist.id
+
+
+SELECT sum(au.level) as count FROM usertree as ut, adminuser as au
+where ut.user_id=au.id and ut.parent_id=3
+order by au.level DESC LIMIT 0,3
+
+SELECT concat(au.level) as count FROM usertree as ut, adminuser as au where ut.user_id=au.id and ut.parent_id=3 order by au.level DESC LIMIT 0,3
