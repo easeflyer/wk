@@ -21,17 +21,31 @@ class EhcAction extends CommonAction {
 
         $model = new Model();
 
+
         $model->startTrans();
         $sql = "update adminuser a,ehclist e
-                set a.amount = a.amount + e.output + 100000
-                where a.type = e.id";
+                set a.amount = a.amount + e.output
+                where a.type = e.id and a.state=1";
         $numUpdate = $model->execute($sql);
         if(!$numUpdate){
             $this->error('挖矿奖励发放失败！');
             $model->rollback();
             return;
         }
+        $time = time();
+        $sql = "INSERT INTO account(amount,type,efrom,eto,createtime)
+                SELECT e.output,1,'算力奖励',a.username, '{$time}'
+                FROM adminuser a, ehclist e
+                WHERE a.type = e.id AND a.state = 1";
+        $numUpdate = $model->execute($sql);
+        if(!$numUpdate){
+            $this->error('挖矿奖励发放失败！');
+            $model->rollback();
+            return;
+        }
+        $model->commit();
         $msg .= "{$numUpdate}个用户挖矿奖励发放成功！<br />";
+
         $_SESSION['msg'] = '';
         $model = D("Adminuser");
         $userlist = $model->field("id")->select();
@@ -39,7 +53,6 @@ class EhcAction extends CommonAction {
             $model->updateUser($user['id']);
         }
         $msg .= $_SESSION['msg'];
-        $model->commit();
         echo $msg;
         return;
     }

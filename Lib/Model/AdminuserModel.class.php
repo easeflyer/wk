@@ -93,7 +93,7 @@ class AdminuserModel extends RelationModel
      * 递归升级用户。
      */
     public function updateUser($uid){
-        echo "{$uid}--<br />";
+        //echo "{$uid}--<br />";
         $level = $this->ckUpdate($uid);
         //echo $level;exit;
         if($level){
@@ -103,6 +103,7 @@ class AdminuserModel extends RelationModel
             $levelold = $this->level[$data['level']];
             $levelnew = $this->level[$level];
             $_SESSION['msg'] .= "{$data['username']} 从 {$levelold} 升级为 {$levelnew}<br />";
+            //echo "{$data['username']} 从 {$levelold} 升级为 {$levelnew}<br />";
             if($puid) $this->updateUser($puid);
         }
     }
@@ -160,36 +161,37 @@ class AdminuserModel extends RelationModel
         $level = $data['level'];
         //echo "level:{$level}\n";
         $sql = "SELECT concat(au.level) as ll FROM usertree as ut, adminuser as au 
-                where ut.user_id=au.id and ut.parent_id={$uid} order by au.level DESC LIMIT 0,3";                
+                where ut.user_id=au.id and ut.parent_id={$uid} order by au.level desc LIMIT 0,3";                
 
         $data1 = $this->query($sql);
         // function fun($v1,$v2){
         //     return $v1.$v2['ll'];
         // }
         $lstr = array_reduce($data1,function($v1,$v2){return $v1.$v2['ll'];});
-        //return $lstr;
+        $lstr = str_replace("0","",$lstr);
+        //print("lstr:".$lstr."<br />");
         if( $level==0 && 
             $lstr < "1" && 
             $data['amount']>99999) return 1;
         // 1 => 2
         if( $level==1 && 
-            $lstr > "1" && 
+            $lstr > "0" && $lstr < "11" &&
             $data['amount']>99999) return 2;
         // 2 => 3
         if( $level==2 && 
-            $lstr > "11" && 
+            $lstr >= "11" && $lstr < "111" &&
             $data['amount']>99999) return 3;
         // if( $level==3 && 
         //     $subSum = 2 && 
         //     $data['amount']>99999) return 3;
 
         switch($lstr){
-            case "311":return 4;
-            case "321":return 5;
-            case "333":return 6;
-            case "633":return 7;
-            case "663":return 8;
-            case "666":return 9;
+            case "311":return $level == 4 ? 0:4;
+            case "321":return $level == 5 ? 0:5;
+            case "333":return $level == 6 ? 0:6;
+            case "633":return $level == 7 ? 0:7;
+            case "663":return $level == 8 ? 0:8;
+            case "666":return $level == 9 ? 0:9;
         }
         return 0;
     }
