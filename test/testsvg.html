@@ -1,0 +1,22 @@
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<script>
+
+window.onload = function(){
+    var remain = 320;
+    bsvg = document.querySelector("#bsvg");
+    html = '<svg width="120px" height="120px" viewBox="0 0 150 150">';
+    html += '<circle r="58" cx="70" cy="70" fill="yellowgreen" stroke="#655" stroke-width="20" stroke-dasharray="'+remain+' 365" /><text style="fill:red;font-size:12pt" x="50" y="60">剩余：</text><text style="fill:red;font-size:12pt" x="50" y="80">'+remain+'天</text></svg>';
+    bsvg.innerHTML = html;
+}
+
+</script>
+
+<body>
+<div id="bsvg"></div>
+
+
+</body>
+</html>

@@ -1,9 +1,6 @@
 <?php
 
 class PublicAction extends Action {
-    function index(){
-        echo 333;
-    }
 
     function login() {
         //echo 2323232;exit;

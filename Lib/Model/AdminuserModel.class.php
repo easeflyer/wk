@@ -162,7 +162,7 @@ class AdminuserModel extends RelationModel
         //echo "level:{$level}\n";
         $sql = "SELECT concat(au.level) as ll FROM usertree as ut, adminuser as au 
                 where ut.user_id=au.id and ut.parent_id={$uid} order by au.level desc LIMIT 0,3";                
-
+        
         $data1 = $this->query($sql);
         // function fun($v1,$v2){
         //     return $v1.$v2['ll'];
@@ -184,16 +184,24 @@ class AdminuserModel extends RelationModel
         // if( $level==3 && 
         //     $subSum = 2 && 
         //     $data['amount']>99999) return 3;
-
-        switch($lstr){
-            case "311":return $level == 4 ? 0:4;
-            case "321":return $level == 5 ? 0:5;
-            case "333":return $level == 6 ? 0:6;
-            case "633":return $level == 7 ? 0:7;
-            case "663":return $level == 8 ? 0:8;
-            case "666":return $level == 9 ? 0:9;
-        }
+        if  ($this->comp($lstr,"311")) return $level == 4 ? 0:4;
+        if  ($this->comp($lstr,"321")) return $level == 5 ? 0:5;
+        if  ($this->comp($lstr,"333")) return $level == 6 ? 0:6;
+        if  ($this->comp($lstr,"633")) return $level == 7 ? 0:7;
+        if  ($this->comp($lstr,"663")) return $level == 8 ? 0:8;
+        if  ($this->comp($lstr,"666")) return $level == 9 ? 0:9;
         return 0;
     }
+
+    /**
+     * 升级比较 对 三位 level 进行分别比较。
+     */
+    function comp($str1,$str2){
+        if( substr($str1,0,1) < substr($str2,0,1) ) return false;
+        if( substr($str1,1,1) < substr($str2,1,1) ) return false;
+        if( substr($str1,2,1) < substr($str2,2,1) ) return false;
+        return true;
+    }
+
 
 }

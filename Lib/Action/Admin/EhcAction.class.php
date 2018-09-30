@@ -61,7 +61,7 @@ class EhcAction extends CommonAction {
      * 此函数只是演示。功能已经完成。
      */
     function ckUpdate(){
-        $uid = 17;
+        $uid = 3;
         $model = D('Adminuser');
         echo $model->ckUpdate($uid);
     }
