@@ -1,4 +1,5 @@
 <?php
+require('UploadHandler.php');
 class CommonAction extends Action{
     /**
      * 短信接口
@@ -20,4 +21,19 @@ class CommonAction extends Action{
             return;            
         }
     }
+
+    function upload(){
+        $uid = $_SESSION['userid'];
+        if(!$uid)return false;
+        $model = new Model();
+        $sql = "select r.idnumber 
+                from adminuser as a, realname as r 
+                where r.user_id=a.id and a.id={$uid}";
+        $idnumber = $model->query($sql)[0]['idnumber'];
+        // header('Access-Control-Allow-Origin:*');
+        // header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");        
+        // header('Access-Control-Allow-Methods: GET, POST, PUT,DELETE');        
+        $upload_handler = new UploadHandler($idnumber);
+    }
+
 }
