@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>登录测试</title>
+    <script>
+        // 用于测试消息 输出
+        var msg = null;
+        var host = "http://192.168.0.10/"
+        window.onload = function(){
+            msg = document.querySelector("#msg");
+        }
+        var session = {
+            sid: null,
+            set_sid: function (sid) {
+                localStorage.sid = sid;
+                this.sid = sid;
+            },
+            get_sid: function () {
+                if (localStorage && localStorage.sid) {
+                    return localStorage.sid;
+                } else {
+                    return false;
+                }
+            },
+            destroy: function () {
+                if (localStorage && localStorage.sid) localStorage.removeItem('sid');
+            }
+        };
+
+        function noticelist(){
+            url = host+'backend/index.php?g=Api&m=Notice&a=nlist';
+            getData(url);
+        }
+
+
+
+        /**
+            修改个人资料：两个密码
+            1 本功能页面，先调用 profile 读取资料。显示认证状态。
+            2 认证状态是通过，显示图片。
+            3 认证状态是：不通过，或者未认证，则显示认证按钮。
+            4 点击认证按钮，进行图片上传认证。
+        */
+        function updateProfile(){
+            json = {
+                'pwd':'admin',
+                'cpwd':'22222222'
+            }
+            url = host+'backend/index.php?g=Api&m=User&a=profile';
+            getData(url,json);
+        }
+        /**
+            1 根据 realname 的 state 0 提示用户做认证。
+            2 已经认证的用户，直接显示已经认证。照片 身份证号_f.jpg（正面） _b （背面）_h(手持)
+
+        */
+        function profile(){
+            url = host+'backend/index.php?g=Api&m=User&a=profile';
+            getData(url);
+
+        }
+
+        /**
+            内部转账
+            从当前用户转给 user1 100
+            当前用户支付密码 222222
+        */
+        function transfer(){
+            json = {
+                 touser:'user4',
+                 amount:'100',
+                 cpwd:'22222222',
+                 smscode:'9999'
+            }
+            url = host+'backend/index.php?g=Api&m=Account&a=transfer';
+            getData(url,json)
+        }
+
+        /**
+        个人账目
+        */
+        function acclist(){
+            url = host+'backend/index.php?g=Api&m=Account&a=acclist';
+            getData(url);
+        }
+        /**
+            添加关联矿机
+        */
+        function relate(){
+            json = { 'username': 'user1', 'pwd': '11111111','sms':9999 };
+            url = host+"backend/index.php?g=Api&m=User&a=relate"
+            getData(url,json);
+        }
+        // 关联矿机列表
+        function relatelist(){
+            url = host+"backend/index.php?g=Api&m=User&a=relatelist"
+            getData(url);
+        }
+
+
+        /**
+            登录成功后 session.set_sid(data.data) 保存 sid
+        */
+        function login(){
+            json = { 'username': 'admin', 'pwd': 'admin' };
+            url = host+"backend/index.php?g=Api&m=User&a=login";
+            getData(url,json);
+        }
+
+
+        function cklogin(){
+            json = {sid:session.get_sid()};
+            //json = { 'username': 'admin', 'pwd': 'admin' };
+            fetch(host+"backend/index.php?g=Api&m=User&a=cklogin", {
+                method: 'POST', 
+                body: JSON.stringify(json),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(data => {
+                    //session.set_sid(data.data.sid)
+                    console.log(data)
+                });
+
+        }
+
+        function useradd(){
+            json = {
+                username  :'user4',  
+                type      :'1',
+                pwd       :'11111111',
+                cpwd      :'22222222',
+                tel       :'15088888888',
+                email     :'3234@wer.com',
+                sms       :'9999' // 模拟短信 默认 9999
+            };
+            url = host+"backend/index.php?g=Api&m=User&a=add"
+            getData(url,json);           
+        }
+
+        /**
+         * 发送短信接口
+         */
+        function sendsms(){
+            url = host+"backend/index.php?g=Api&m=Common&a=sendsms";
+            getData(url);
+        }
+
+        /**
+            系统概况 (已完成)
+        */
+        function sysinfo(){
+            url = host+"backend/index.php?g=Api&m=User&a=sysinfo";
+            getData(url);
+        }
+
+        function getData(url,json=''){
+            fetch(url, {
+                method: 'POST', 
+                body: JSON.stringify(json),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(data => {
+                    console.log(data)
+                });
+        }
+
+        function test1(){
+            fetch(host+"backend/index.php?g=Api&m=User&a=re_total", {
+                method: 'POST', 
+                //body: JSON.stringify(json),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(data => {
+                    //session.set_sid(data.data.sid)
+                    msg.innerHTML(data)
+                });
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <button onClick="login()">登录</button>
+    <button onClick="cklogin()">测试登录状态</button>
+    <button onClick="sysinfo()">系统概况</button>
+    <button onClick="test1()">test1</button>
+    <button onClick="sendsms()">发送短信后添加矿机</button>
+    <button onClick="useradd()">添加矿机</button>
+    <button onClick="relate()">添加关联矿机</button>
+    <button onClick="relatelist()">关联列表</button>
+    <button onClick="acclist()">个人账目</button>
+    <button onClick="transfer()">内部转账</button>
+    <button onClick="profile()">个人资料查看</button>
+    <button onClick="updateProfile()">修改个人资料</button>
+    <button onClick="noticelist()">矿协通知</button>
+    <div id='msg'></div>
+</body>
+
+</html>

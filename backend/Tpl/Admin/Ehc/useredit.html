@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>添加矿机</title>
+  <include file="Common:miniheader" />
+  <link rel="stylesheet" type="text/css" href="__SKIN__css/tableform.css" />
+  <script>
+    function getData(url, json = '',callback) {
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(json),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(data => {
+          console.log(data);
+          callback(data);
+        });
+    }
+    function changeState(state) {
+      userid = "{$data['id']}";
+      url = "/backend/index.php?g=Api&m=User&a=changeState";
+      json = {id:userid,state:state};
+      getData(url,json,function(data){
+        if(state=='1'){
+          state = document.querySelector('#state');
+          state.style="color:green";
+          state.innerHTML = "运行 <input type=\"button\" onClick=\"changeState(0)\" value=\"停止\" />";
+        }else{
+          state = document.querySelector('#state');
+          state.style="color:red";
+          state.innerHTML = "停止 <input type=\"button\" onClick=\"changeState(1)\" value=\"启动\" />";
+        }
+      });
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="easyui-panel" data-options="
+	title:'用户级别',
+	border:false,
+	iconCls:'icon-vcard_add'
+">
+    <form name="f1" action="" method="POST" enctype="multipart/form-data">
+      <table class="table-form" border="1" width="100%">
+        <tr>
+          <th>矿主用户名
+            <input type="hidden" name="userid" value="{$data['id']}" />
+          </th>
+          <td><input disabled type="text" name="username" class="ipt" value="{$data['username']}"></td>
+        </tr>
+        <tr>
+          <th>类型</th>
+          <td>
+            <select name='type'>
+              <foreach name='type' item='val' key='i'>
+                <if condition="$data['type'] eq $i">
+                  <option value="{$i}" selected>{$val}</option>
+                  <else />
+                  <option value="{$i}">{$val}</option>
+                </if>
+              </foreach>
+            </select>
+
+          </td>
+        </tr>
+        <tr>
+          <th>等级</th>
+          <td>
+            {$level[$data['level']]}
+          </td>
+        </tr>
+        <tr>
+          <th>电话</th>
+          <td><input type="text" name="tel" class="ipt" value="{$data['tel']}"></td>
+        </tr>
+        <tr>
+          <th>邮箱</th>
+          <td><input type="text" name="email" class="ipt" value="{$data['email']}"></td>
+        </tr>
+        <tr>
+          <th>金额</th>
+          <td><input type="text" name="amount" class="ipt" value="{$data['amount']}"></td>
+        </tr>
+
+        <tr>
+          <th>登录密码</th>
+          <td><input type="text" name="pwd" class="ipt"></td>
+        </tr>
+        <tr>
+          <th>支付密码</th>
+          <td><input type="text" name="cpwd" class="ipt"></td>
+        </tr>
+        <tr>
+          <th>状态</th>
+          <td>
+            <if condition="$data['state'] eq 0">
+              <span id="state" style="color:red">停止
+                <input type="button" onClick="changeState(1)" value="启动" />
+              </span>
+              
+              <else />
+              <span id="state" style="color:green">运行
+                  <input type="button" onClick="changeState(0)" value="停止" />
+              </span>
+            </if>
+          </td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <td><input type="submit" name="s1" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" name="r1"
+              value="清除"></td>
+        </tr>
+      </table>
+
+    </form>
+  </div>
+</body>
+
+</html>
