@@ -1,0 +1,20 @@
+.headers{
+    background: #1B5561;
+    height: 50px;
+    line-height: 50px;
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-between;
+    color: #fff;
+}
+.rt span, .lf span{
+    padding: 0px;
+    margin: 0px;
+    font-family: "微软雅黑","Microsoft YaHei","Microsoft YaHei UI","Hiragino Sans GB W3","Segoe UI", Arial, Verdana, Sans-Serif, sans-serif;
+    position: relative;
+    top: 10px;
+    font-size: 14px;
+}
+.title{
+    font-size: 16px;
+}

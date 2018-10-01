@@ -1,0 +1,70 @@
+#tab-bar.demo {
+    display: flex;
+    flex-direction: column;
+  }
+#tab-bar .demoName {
+    height: 40px;
+  }
+#tab-bar .demo-preview-item .am-tab-bar {
+    background-color: white;
+  }
+
+.master{
+  /* background-color: red; */
+  background: rgb(6,13,32);
+  position: relative;
+  /* background-color: rgba(0, 0, 0, .3); */
+}
+.menu1, .menu2, .menu3{
+  position: absolute;;
+  background-color:#1f4c59;
+  text-align: center;
+  bottom: 62px;
+  z-index: 10;
+  color: white;
+
+  margin-left: 2.5%;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 1px solid #1f4c59;
+  border-radius: 5px;
+
+}
+
+.tiggle{
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+  bottom: -9px;
+  border-top: 10px solid #1f4c59;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  z-index: 10;
+}
+.innertiggle{
+  width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    margin-left: -9px;
+    bottom: -8px;
+    border-top: 9px solid #1f4c59;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    z-index: 11;
+}
+
+.menu1 {
+  left:25%;
+}.menu2 {
+  left:50%;
+}.menu3 {
+  right: 3%;
+}
+
+.navbtn{
+  padding: 10px 0px;
+}

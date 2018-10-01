@@ -1,0 +1,211 @@
+.allNetCount {
+    padding-top: 10px;
+    margin: 0;
+    padding: 0;
+}
+.contractPandect {
+    margin-top: 10px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.col-xs-12{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.rowStyle{
+    font-size: 14px;
+    padding: 0px 10px;
+    border-left: 4px solid #05fffe;
+    color: #05fffe;
+    margin: 0 auto;
+    font-family: 'Arial';
+}
+.netCount{
+    height: 100px;
+    padding-top: 15px;
+}
+.countMain {
+    width: 100%;
+    height: 65px;
+}
+.countMain ul{
+    width: 100%;
+    height: 100%;
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.countMain ul li {
+    width: 9%;
+    height: 100%;
+    background-color: rgba(5,73,98,1);
+    color: #05fffe;
+    text-align: center;
+    line-height: 65px;
+    margin-right: 10px;
+    font-size: 24px;
+    font-family: DS-Digital;
+    float: left;
+    list-style: none;
+    display: list-item;
+}
+
+.countMain ul li:last-child {
+    background-color: rgb(6,13,32);
+    color:white;
+}
+
+.col-xs-6 {
+    width: 50%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.panelc {
+    height: 90px;
+    border-radius: 10px;
+    position: relative;
+    background: #0c1832;
+    box-sizing: border-box;
+}
+.value {
+    padding: 10px !important;
+    margin: 0;
+    box-sizing: border-box;
+}
+.symboCommred{
+    background: url(/Images/node.png) 0 0 no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 50px;
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 17%;
+}
+.totalNum{
+    background: url(/Images/channel.png) 0 0 no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 50px;
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 17%;
+}
+.count1{
+    color: rgb(0, 150, 140);
+    font-size: 24px;
+    font-family: DS-Digital;
+}
+.addAmount{
+    background: url(/Images/computer2.png) 0 0 no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 50px;
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 17%;
+}
+
+.text-position {
+    font-size: 13px;
+    padding: 0;
+    position: absolute;
+    bottom: 20px;
+
+    color: #05fffe;
+    margin: 0 auto;
+    font-family: 'Arial';
+}
+.circleGap {
+    padding: 5px;
+    margin-top: 130px;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.panel-body {
+    width: 129px;
+    height: 121px;
+    margin-left: 10%;
+    background: url(/Images/0.75circle.png) 0 0 no-repeat;
+    background-size: contain;
+    margin-top: 66px;
+    position: relative;
+    padding: 0px;
+}
+
+.moveCircle {
+    width: 32%;
+    height: 98%;
+    background: url(/Images/pink.png) 0 101% no-repeat;
+    background-size: contain;
+}
+.rotateCircle{
+    width: 32%;
+    height: 98%;
+    background: url(/Images/yellow.png) 0 101% no-repeat;
+    background-size: contain;
+}
+
+
+.panel-body center a{
+    color: #f6af05;
+    font-size: 16px;
+    position: absolute;
+    top: 45%;
+    left: 20%;
+    text-decoration: none;
+    outline: none;
+}
+
+
+
+
+/* 合约倒计时的样式，好像没什么效果 */
+.box {
+    width: 140px;
+    height: 140px;
+    background: url(/Images/circle.png) 0 0 no-repeat;
+    background-size: contain;
+    margin-top: 15px;
+    position: absolute;
+    margin-left: 10%;
+}
+.box1{
+    width: 140px;
+    height: 140px;
+    padding-bottom: 0px;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+.box2{
+    position: relative;
+    overflow: hidden;
+    width: 140px;
+    height: 140px;
+    padding: 0px;
+    margin: 0px;
+    border-width: 0px;
+}
+.cavans1{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 140px;
+    height: 140px;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    padding: 0px;
+    margin: 0px;
+    border-width: 0px;
+    display: inline-block;
+    vertical-align: baseline;
+}

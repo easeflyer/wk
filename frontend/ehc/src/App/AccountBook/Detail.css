@@ -1,0 +1,12 @@
+.detailTable{
+    color: darkgray;
+    width: 100%;
+    font-size: 13px;
+    border-top: 1px solid #47e9e9;
+}
+.detailTable thead{
+    border-bottom: 1px solid rgb(80, 79, 79);
+}
+.detailTable tbody tr:nth-child(even) {
+  background-color:rgba(50, 87, 84, 0.356);
+}

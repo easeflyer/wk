@@ -1,0 +1,157 @@
+
+.indexBox {
+    padding-bottom: 100px;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.col-lg-6{
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.userInfoBox {
+    width: 80%;
+    height: 200px;
+    background: #063341;
+    border-radius: 5px;
+    border: 1px solid #05b9bc;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 5px 5px 10px #07525d inset, -5px -5px 10px #07525d inset;
+}
+.userblue{
+
+}
+.userTitle {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background: url(/Images/userStar.png) 0 0 no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+.wheel {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: url(/Images/wheel.png) 0 0 no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 14px;
+    left: 35px;
+}
+.value {
+    padding: 10% 0px 0px 23%;
+    margin: 0px;
+    color: #4ffffe;
+
+}
+.value a{
+    text-decoration: none;
+    outline: none;
+}
+.value a h3{
+    color: #05fffe;
+    font-size: 24px;
+
+}
+.value p{
+    font-size: 16px; 
+}
+.threeRect {
+    width: 8px;
+    height: 8px;
+    background-color: #32adb2;
+    display: inline-block;
+    margin: 2px;
+}
+
+.triangle {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: url(/Images/rectHalf.png) 0 0 no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.symbol{
+    text-align: center;
+    margin-top: 60px;
+}
+.iconAdd {
+    font-size: 50px;
+    font-weight: 500;
+    color: #4ffffe;
+}
+.modals{
+    /* z-index: 19991016; */
+    width: 95%;
+    height: 350px;
+    top: 133.5px;
+    left: 9.5px;
+    animation-name: bounceIn;
+    background: rgb(6,13,32);
+    border-radius: 10px;
+    border: 2px solid #2dd9d9;
+    position: fixed;
+}
+.modals-title {
+    padding: 0 115px 0 20px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3dd2d3;
+    overflow: hidden;
+    background-color: #025058;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-content {
+    /* height: 286px; */
+    position: relative;
+    overflow: auto;
+    color: #4ffffe;
+    padding: 20px;
+}
+
+.relareCommitbtn, .relareCancelbtn {
+    margin: 0px 20px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 18px;
+    background-color: #3dd2d3;
+    white-space: nowrap;
+    text-align: center;
+    border: 1px solid #3dd2d3;
+    border-radius: 5px;
+    color: #555;
+    font-size: 14px;
+}
+.relareCommitbtn{
+    background-color: #fff;
+}
+.x {
+    position: absolute;
+    right: 15px;
+    top: 19px;
+    font-size: 0;
+    line-height: initial;
+}
+.x span {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    display: inline-block;
+}
+.layui-layer-ico {
+    background: url(/Images/close.png) 0 0 no-repeat;
+}

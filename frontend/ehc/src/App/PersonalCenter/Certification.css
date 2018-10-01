@@ -1,0 +1,26 @@
+.form-label {
+    width: 120px;
+    color: #47e9e9;
+    float: left;
+    margin-bottom: 5px;
+    padding: 9px 0px;
+}
+.pic{
+    width: 260px;
+    border: 0;
+    margin-left: 15px;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+
+/* 上传图片按钮的大小 */
+.avatar-uploader > .ant-upload {
+  width: 128px;
+  height: 128px;
+}
