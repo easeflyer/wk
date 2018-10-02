@@ -110,3 +110,31 @@ where ut.user_id=au.id and ut.parent_id=3
 order by au.level DESC LIMIT 0,3
 
 SELECT concat(au.level) as count FROM usertree as ut, adminuser as au where ut.user_id=au.id and ut.parent_id=3 order by au.level DESC LIMIT 0,3
+
+
+
+
+
+
+# 测试概要
+
+
+## 前端：
+
+
+    系统概况 增加饼图。
+
+    1 添加矿机
+
+    矿机类型 从2开始
+    颜色风格
+
+    2 关联矿机，后台已经提供了正确数据，前台列出来即可。点击事件暂时不做。
+
+    3 账号明细，金额加上 ehc
+
+    4 个人资料 第二栏4 显示成 es1,2,3,4 等形式。
+        实名认证，成功的直接显示图片。为通过的显示上传。 状态增加“待审核”
+        已认证后就不能再修改了。
+
+    5 公告 弹窗显示

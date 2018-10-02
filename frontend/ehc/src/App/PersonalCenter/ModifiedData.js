@@ -108,7 +108,7 @@ class ModifiedDataForm extends React.Component {
                 clear
                 type="text"
                 // TODO: 矿机名，不知道哪个字段，需要确认修改
-                value={this.state.level}
+                value={this.state.type}
                 disabled
               >
               </InputItem>

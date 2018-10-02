@@ -2,6 +2,13 @@
 
 class UserAction extends Action
 {
+    private $type=array(
+        1=>'一类矿机',
+        2=>'二类矿机',
+        3=>'三类矿机',
+        4=>'四类矿机',
+        5=>'五类矿机',
+    );    
     /**
      * 获得 fetch post json 数据
      */
@@ -45,6 +52,7 @@ class UserAction extends Action
                 return;
             }
         }
+        $data['type'] = $this->type[$data['type']];
         echo json_encode($data);
     }
 
@@ -54,7 +62,8 @@ class UserAction extends Action
     function relatelist(){
         $uid = $_SESSION['userid'];
         $model = new Model();
-        $sql = "SELECT au.id,au.username,au.tel,au.email,au.createtime from adminuser as au,relation where au.id=relation.r_id and relation.user_id={$uid}";
+        //$sql = "SELECT au.id,au.username,au.tel,au.email,au.createtime from adminuser as au,relation where au.id=relation.r_id and relation.user_id={$uid}";
+    $sql = "SELECT au.id,au.username,au.type,e.output from ehclist as e,adminuser as au,relation where au.id=relation.r_id and e.id=au.type and relation.user_id={$uid}";
         $data = $model->query($sql);
         function fun($item){
             $item['createtime'] = date("Y-m-d H:i:s",$item['createtime']);
