@@ -19,7 +19,6 @@ export default class ManagementRelate extends React.Component {
     this.getMillData();
   }
 
-
   // 获取关联矿机信息
   getMillData = () => {
     // TODO:关联矿机信息应该用户名，产量和矿机类型？？？
@@ -36,7 +35,6 @@ export default class ManagementRelate extends React.Component {
     }
   }
 
-
   togglehidden = (index) => {
     this.setState({ hidden: index })
   }
@@ -44,58 +42,24 @@ export default class ManagementRelate extends React.Component {
     const none = { display: 'none' };
     const block = { display: 'block' };
 
-    // const boxDiv = this.state.data ?
-    //   this.state.data.map((element, index) => {
-    //     <div className='col-lg-6'>
-    //       <section className='userInfoBox'>
-    //         <div className='userblue'>
-    //           <i className='userTitle'></i>
-    //           <i className='wheel'></i>
-    //         </div>
-    //         <div className='value'>
-    //           {/* TODO:用户账号信息，需跟后台对接 */}
-    //           <a onClick={() => this.props.menuCLick('Survey')}>
-    //             <h3>{element.username}</h3>
-    //           </a>
-    //           <p>
-    //             {/* TODO:矿机类型，需跟后台对接 */}
-    //             {element.type}
-    //             <br />
-    //             <span>昨日产量：</span>
-    //             {/* TODO:产量信息，需跟后台对接 */}
-    //             {element.number}EHC
-    //           </p>
-    //           <div style={{ marginTop: '30PX' }}>
-    //             <i className='threeRect'
-    //               style={{ marginLeft: '80%' }}></i>
-    //             <i className='threeRect'></i>
-    //             <i className='threeRect'></i>
-    //           </div>
-    //         </div>
-    //       </section>
-    //     </div>
-    //   }) : null
-
-    return (<div>
-      <Navbar title='关联矿机' />
-      <header className='larry-personal-tit' >
-        <span className='rowBorder'>关联矿机</span>
-      </header>
-      <div className='indexBox'>
-
-        <div className='col-lg-6'>
+    console.log(this.state.data)
+    const boxDiv = this.state.data ?
+      this.state.data.map((element, index) => {
+        return <div className='col-lg-6' key={index}>
           <section className='userInfoBox'>
             <div className='userblue'>
               <i className='userTitle'></i>
               <i className='wheel'></i>
             </div>
             <div className='value'>
-              <a onClick={() => this.props.menuCLick('Survey')}> <h3>
-                niuchunyu001</h3> </a>
+              <a onClick={() => this.props.menuCLick('Survey')}>
+                <h3>{element.username}</h3>
+              </a>
               <p>
-                二类矿机
-              <br />
-                <span>昨日产量：</span>19.23EHC
+                {element.type}
+                <br />
+                <span>昨日产量：</span>
+                {element.output}EHC
               </p>
               <div style={{ marginTop: '30PX' }}>
                 <i className='threeRect'
@@ -106,7 +70,16 @@ export default class ManagementRelate extends React.Component {
             </div>
           </section>
         </div>
-        {/* {boxDiv} */}
+      }) : null
+
+    return (<div>
+      <Navbar title='关联矿机' />
+      <header className='larry-personal-tit' >
+        <span className='rowBorder'>关联矿机</span>
+      </header>
+      <div className='indexBox'>
+
+        {boxDiv}
 
         <div className='col-lg-6'>
           <section className='userInfoBox'>

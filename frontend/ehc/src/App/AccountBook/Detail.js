@@ -18,7 +18,7 @@ export default class AccountBookDetail extends React.Component {
     const data = res ?
       res.map((element, index) => {
         return <tr key={index}>
-          <td>{element.amount}</td>
+          <td>{element.amount}ehc</td>
           <td>{element.type}</td>
           <td>{element.efrom}</td>
           <td>{element.eto}</td>

@@ -169,10 +169,21 @@ export default class Survey extends React.Component {
         <div className='col-xs-6'>
           <p className='rowStyle'>合约租赁倒计时</p>
           <div className='box'>
-          <svg width="120px" height="120px" viewBox="0 0 150 150">
-<circle r="58" cx="70" cy="70" fill="#655" stroke="yellowgreen" strokeWidth="20" strokeDasharray={this.state.timer+" 365"} />
-<text style={{fill:'#f6af05',fontSize:'12pt'}} x="50" y="60">剩余：</text><text style={{fill:'#f6af05',fontSize:'12pt'}} x="50" y="80">{this.state.timer} 天</text>
-</svg>
+            <div style={{width:'10px',
+              marginLeft:'10%',
+              marginTop:'10%'}}>
+              <svg width="120px" height="120px" 
+                viewBox="0 0 150 150">
+                <circle r="58" cx="70" cy="70" 
+                  fill="#655" stroke="yellowgreen" 
+                  strokeWidth="20" 
+                  strokeDasharray={this.state.timer+" 365"} />
+                  <text style={{fill:'#f6af05',fontSize:'12pt'}} 
+                    x="50" y="60">剩余：</text><text 
+                    style={{fill:'#f6af05',fontSize:'12pt'}}
+                    x="50" y="80">{this.state.timer} 天</text>
+              </svg>
+            </div>
           </div>
         </div>
       </div>

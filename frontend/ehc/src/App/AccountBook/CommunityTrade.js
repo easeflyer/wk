@@ -43,7 +43,7 @@ class CommunityTradeForm extends React.Component {
     console.log('获取社区交易验证码！', this.state.tel)
     console.log(this.state.tel)
 
-    // if (this.state.tel) {
+    if (this.state.tel) {
     const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms";
     getData(url, this.sendsmsCallback, { tel: this.state.tel });
     var t = 60;
@@ -59,18 +59,18 @@ class CommunityTradeForm extends React.Component {
         }
       }, 1000)
     })
-    // } else {
-    //   Toast.fail('手机号有误！');
-    // }
+    } else {
+      Toast.fail('手机号有误！');
+    }
   }
 
   callback = (res) => {
     console.log(res)
-    // if (res.state === 'success') {
+    if (res.state === 'success') {
     // TODO: 状态码的判断需要再确认
     this.props.menuCLick('AccountBookDetail');
 
-    // }
+    }
     Toast.info(res.msg);
   }
 
