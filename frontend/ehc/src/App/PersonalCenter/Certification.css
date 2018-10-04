@@ -1,5 +1,5 @@
 .form-label {
-    width: 120px;
+    width: 150px;
     color: #47e9e9;
     float: left;
     margin-bottom: 5px;
@@ -8,8 +8,21 @@
 .pic{
     width: 260px;
     border: 0;
-    margin-left: 15px;
     display: inline-block;
+}
+.noticemodal{
+    width: 95%;
+    top: 133.5px;
+    left: 9.5px;
+    background: rgba(6, 13, 32, 0.514);
+    border-radius: 10px;
+    border: 2px solid #2dd9d9;
+    position: fixed;
+}
+.noticeContent{
+    height: 280px;
+    color: rgb(141, 137, 137);
+    overflow: scroll;
 }
 
 
@@ -18,9 +31,25 @@
 
 
 
-
 /* 上传图片按钮的大小 */
+
+/* you can make up upload button and sample style by using stylesheets */
+/* .ant-upload-select-picture-card i {
+    font-size: 32px;
+    color: #999;
+  }
+  
+  .ant-upload-select-picture-card .ant-upload-text {
+    margin-top: 8px;
+    color: #666;
+  }
+div.clearfix{
+  float:left;
+} */
 .avatar-uploader > .ant-upload {
-  width: 128px;
-  height: 128px;
+  margin-left: 15px;
+}
+
+.ant-upload.ant-upload-select-picture-card > .ant-upload{
+    padding: 0
 }

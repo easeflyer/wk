@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { InputItem } from 'antd-mobile';
+import session from '../Utils/session';
 import { Upload, Icon, message } from 'antd';
 import 'antd/dist/antd.css';
 import "./Uploads.css";
@@ -57,6 +58,8 @@ export default class Uploads extends React.Component {
     const { imageUrl1, imageUrl2, imageUrl3 } = this.state;
     return (
       <div>
+
+
         <Upload
           name="file"
           listType="picture-card"
