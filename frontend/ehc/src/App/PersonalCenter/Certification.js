@@ -14,10 +14,10 @@ function getBase64(img, callback) {
 }
 
 function beforeUpload(file) {
-  //const isJPG = file.type === 'image/jpeg';
-  const isJPG = ['image/gif', 'image/png', 'image/jpeg'].indexOf(file.type) !== -1;
+  const isJPG = file.type === 'image/jpeg'; // 限制只允许 jpg
+  //const isJPG = ['image/gif', 'image/png', 'image/jpeg'].indexOf(file.type) !== -1;
   if (!isJPG) {
-    message.error('图片格式不符合要求！gif/png/jpg');
+    message.error('图片格式不符合要求！需要jpg格式！');
   }
   const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isLt2M) {
@@ -37,17 +37,18 @@ export default class Certification extends React.Component {
   componentWillMount() {
     const usermsg = JSON.parse(session.get_usermsg());
     //TODO:  1代表待审核，3代表通过，都应该把图片显示出来，需要确认一下图片地址是否正确
-    if (usermsg.Realname.state === '1'
-      || usermsg.Realname.state === '3') {
+    if (usermsg.Realname.state === '1'    // 待审核
+      || usermsg.Realname.state === '3') { // 已认证
       this.setState({
-        imageUrl1: "/backend/index.php?g=Api&m=Common&a=upload&side=f",
-        imageUrl2: "/backend/index.php?g=Api&m=Common&a=upload&side=b",
-        imageUrl3: "/backend/index.php?g=Api&m=Common&a=upload&side=h",
+        // 图片的 Url ：http://host/backend/Public/idImages/身份证号_z/b/h.jpg
+        imageUrl1: `/backend/Public/idImages/${usermsg.Realname.idnumber}_f.jpeg`,
+        imageUrl2: `/backend/Public/idImages/${usermsg.Realname.idnumber}_b.jpeg`,
+        imageUrl3: `/backend/Public/idImages/${usermsg.Realname.idnumber}_h.jpeg`,
       })
     }
-    console.log('sdhdshd', usermsg.Realname.state === '2')
+    console.log('sdhdshd', usermsg.Realname.state === '2') // 未通过
     this.setState({
-      username: usermsg.username,
+      username: usermsg.Realname.realname,
       idnumber: usermsg.Realname.idnumber,
       realnameState: usermsg.Realname.state,
     })
@@ -72,16 +73,16 @@ export default class Certification extends React.Component {
 
   toggleState = () => {
     //TODO: 发送数据到后台改变状态，这个接口需要补全
-    // const url = HOST + '/backend/index.php?g=Api&m=User&a=profile';
+    const url = HOST + '/backend/index.php?g=Api&m=User&a=changeRnState';
     const json = { state: '1' }
-    const url = HOST + '/';
     getData(url, this.callback, json);
   }
   callback = (res) => {
     // 更改实名认证状态成功后修改本地状态
+    console.log('resss:',res)
     if (res) {
       this.setState({
-        realnameState: '1',
+        realnameState: '1',  // 待审核
       })
     }
   }
@@ -204,9 +205,8 @@ export default class Certification extends React.Component {
         <div className='layui-form-item'
           style={
             // 当本地状态有图片URL并且实名认证状态是未上传或拒绝，按钮显示可点击
-            (imageUrl1 && imageUrl2 && imageUrl3) &&
               (this.state.realnameState === '0' || this.state.realnameState === '2')
-              ? { display: 'none' } : { display: 'block' }}>
+              ? { display: 'block' } : { display: 'none' }}>
           <div className='layui-input-block'>
             <Button className='msgbtn1' style={{ marginLeft: '30%' }}
               onClick={this.toggleState}>提交图片信息</Button>

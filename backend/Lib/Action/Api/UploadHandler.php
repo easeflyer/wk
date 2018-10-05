@@ -45,8 +45,10 @@ class UploadHandler
         $this->response = array();
         $this->options = array(
             'script_url' => $this->get_full_url().'/'.$this->basename($this->get_server_var('SCRIPT_NAME')),
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/files/',
-            'upload_url' => $this->get_full_url().'/files/',
+            // 'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/files/',
+            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/Public/idImages/',
+            // 'upload_url' => $this->get_full_url().'/files/',
+            'upload_url' => $this->get_full_url().'/Public/idImages/',
             'input_stream' => 'php://input',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
@@ -531,6 +533,7 @@ class UploadHandler
                 preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {
             $name .= '.'.$matches[1];
         }
+        // ease 修改 jpg 为 jpeg
         if ($this->options['correct_image_extensions'] &&
                 function_exists('exif_imagetype')) {
             switch (@exif_imagetype($file_path)) {

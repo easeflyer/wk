@@ -10,7 +10,7 @@
         function op(id,state) {
             $.post("{:U('Ehc/ckrname')}", { id: id, state: state },
                 function (data) {
-                    if(data)$("#op").html("<span style=\"color:green\">已认证</span>");
+                    if(data=='3')$("#op").html("<span style=\"color:green\">已认证</span>");
                     else $("#op").html("<span style=\"color:red\">未通过</span>");
                 });
         }
@@ -38,10 +38,12 @@
                         <th>是否通过认证</th>
                         <td>
                             <div id="op">
-                                <if condition="$data[state] eq 0">
-                                    <input type="button" value="通过" onClick="op({$data[id]},2)" />
-                                    <input type="button" value="不通过" onClick="op({$data[id]},1)" />
-                                    <elseif condition="$data[state] eq 1" />
+                                <if condition="$data[state] eq 1">待审核
+                                    <input type="button" value="通过" onClick="op({$data[id]},3)" />
+                                    <input type="button" value="不通过" onClick="op({$data[id]},2)" />
+                                    <elseif condition="$data[state] eq 0" />
+                                    <span style="color:orange">未提交</span>
+                                    <elseif condition="$data[state] eq 2" />
                                     <span style="color:red">未通过</span>
                                     <else />
                                     <span style="color:green">已认证</span>
@@ -51,15 +53,15 @@
                     </tr>
                 <tr>
                     <th>身份证正面</th>
-                    <td><img src="__PUBLIC__/idImages/{$data[idnumber]}-f.jpg" /></td>
+                    <td><img width="300" src="/backend/Public/idImages/{$data[idnumber]}_f.jpeg" /></td>
                 </tr>
                 <tr>
                     <th>身份证背面</th>
-                    <td><img src="__PUBLIC__/idImages/{$data[idnumber]}-b.jpg" /></td>
+                    <td><img width="300" src="/backend/Public/idImages/{$data[idnumber]}_b.jpeg" /></td>
                 </tr>
                 <tr>
                     <th>手持身份证</th>
-                    <td><img src="__PUBLIC__/idImages/{$data[idnumber]}-h.jpg" /></td>
+                    <td><img width="300" src="/backend/Public/idImages/{$data[idnumber]}_h.jpeg" /></td>
                 </tr>
 
 

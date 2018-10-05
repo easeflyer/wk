@@ -68,7 +68,7 @@ class AdminuserModel extends RelationModel
                 [amount] => 2303.00
             )
      */
-    public function newly($id=3)
+    public function newly($id)
     {
         function refun($id)
         {
@@ -81,6 +81,7 @@ class AdminuserModel extends RelationModel
             }
             return $ids;
         }
+        $id = $_SESSION['userid'];
         $time = time();
         $week = 7 * 24 * 3600;  // 7 天新增
         $ids = implode(",", refun($id));
@@ -112,51 +113,52 @@ class AdminuserModel extends RelationModel
      * 判断一个用户是否可以升级。
      * 返回升级编号0-8
      */
-    public function ckUpdate1($uid){
-        //     4 5 6  7  8  9   对应的等级 合计
-        $ll = [5,6,9, 12,15,18];
-        $data = $this->find($uid);
-        $ehc = $data['amount'];
-        $level = $data['level'];
-        //echo "level:{$level}\n";
-        // (废弃) 取出所有子用户的 level 前三合计
-        $sql = "SELECT sum(au.level) as count FROM usertree as ut, adminuser as au " . 
-                "where ut.user_id=au.id and ut.parent_id={$uid} " .
-                "order by au.level DESC LIMIT 0,3";
+    // public function ckUpdate1($uid){
+    //     //     4 5 6  7  8  9   对应的等级 合计
+    //     $ll = [5,6,9, 12,15,18];
+    //     $data = $this->find($uid);
+    //     $ehc = $data['amount'];
+    //     $level = $data['level'];
+    //     //echo "level:{$level}\n";
+    //     // (废弃) 取出所有子用户的 level 前三合计
+    //     $sql = "SELECT sum(au.level) as count FROM usertree as ut, adminuser as au " . 
+    //             "where ut.user_id=au.id and ut.parent_id={$uid} " .
+    //             "order by au.level DESC LIMIT 0,3";
 
-        //$sql = $this->getLastSql();
-        $subSum = $data1[0]['count'];
-        //echo "subSum:{$subSum}\n";exit;
-        //return $subSum;
-        // 0 => 1
-        if( $level==0 && 
-            $subSum < 1 && 
-            $data['amount']>99999) return 1;
-        // 1 => 2
-        if( $level==1 && 
-            $subSum == 1 && 
-            $data['amount']>99999) return 2;
-        // 2 => 3
-        if( $level==2 && 
-            $subSum == 2 && 
-            $data['amount']>99999) return 3;
-        // if( $level==3 && 
-        //     $subSum = 2 && 
-        //     $data['amount']>99999) return 3;
+    //     //$sql = $this->getLastSql();
+    //     $subSum = $data1[0]['count'];
+    //     //echo "subSum:{$subSum}\n";exit;
+    //     //return $subSum;
+    //     // 0 => 1
+    //     if( $level==0 && 
+    //         $subSum < 1 && 
+    //         $data['amount']>99999) return 1;
+    //     // 1 => 2
+    //     if( $level==1 && 
+    //         $subSum == 1 && 
+    //         $data['amount']>99999) return 2;
+    //     // 2 => 3
+    //     if( $level==2 && 
+    //         $subSum == 2 && 
+    //         $data['amount']>99999) return 3;
+    //     // if( $level==3 && 
+    //     //     $subSum = 2 && 
+    //     //     $data['amount']>99999) return 3;
 
-        if($level > 2){
-            foreach($ll as $k=>$v){
-                if($subSum>$v) continue;
-                if($level == $k+4) return 0;
-                return $k+4;
-            }
-        }
-        return 0;
-    }
+    //     if($level > 2){
+    //         foreach($ll as $k=>$v){
+    //             if($subSum>$v) continue;
+    //             if($level == $k+4) return 0;
+    //             return $k+4;
+    //         }
+    //     }
+    //     return 0;
+    // }
     public function ckUpdate($uid){
         //     4 5 6  7  8  9   对应的等级 合计
         $ll = [5,6,9, 12,15,18];
         $data = $this->find($uid);
+        if($data['state']==0)return 0;
         $ehc = $data['amount'];
         $level = $data['level'];
         //echo "level:{$level}\n";

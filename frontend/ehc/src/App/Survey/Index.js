@@ -28,7 +28,8 @@ export default class Survey extends React.Component {
       )}
     </ul>)
     //全网总算力
-    let ehctotal = String(this.state.ehctotal) + 'T';
+    let ehc = this.state.ehctotal/1000000000000;
+    let ehctotal = String(ehc.toFixed(2)) + 'T';
     ehctotal = (<ul>
       {[...ehctotal].map((item, index) =>
         <li key={index}>{item}</li>

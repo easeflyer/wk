@@ -41,9 +41,9 @@ export default class TabBarExample extends React.Component {
     // const realName = res.Realname;
     // const amount = res.amount;
     // console.log(realName)
-    if (res.state === '1') {
+    if (res.state === 'success') {
       
-      session.set_usermsg(JSON.stringify(res));
+      session.set_usermsg(JSON.stringify(res.data));
     } else { 
       Toast.info('获取用户资料失败！')
     }

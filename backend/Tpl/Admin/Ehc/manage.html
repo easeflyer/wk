@@ -82,10 +82,13 @@
                         <td>
                             {$val['realname']}
                             <if condition="$val[rstate] eq 0">
-                                (<a href="{:U('Ehc/realname',array('id'=>$val[id]))}}"><span style="color:orange">审核</span></a>)
-                            <elseif condition="$val[rstate] eq 1" />
+                                (<a href="{:U('Ehc/realname',array('id'=>$val[id]))}}"><span style="color:#333333">未提交</span></a>)
+                                <elseif condition="$val[rstate] eq 1" />
+                                (<a href="{:U('Ehc/realname',array('id'=>$val[id]))}}"><span style="color:orange">待审核</span></a>)
+                                <elseif condition="$val[rstate] eq 2" />
                                 (<a href="{:U('Ehc/realname',array('id'=>$val[id]))}}"><span style="color:red">未通过</span></a>)
-                            <else />
+
+                                <else />
                                 (<a href="{:U('Ehc/realname',array('id'=>$val[id]))}}"><span style="color:green">已认证</span></a>)
                             </if>
                         </td>

@@ -36,4 +36,8 @@ class CommonAction extends Action{
         $upload_handler = new UploadHandler($idnumber);
     }
 
+    function tt(){
+        print_r($_SESSION);
+    }
+
 }
