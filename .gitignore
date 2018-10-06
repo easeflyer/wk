@@ -64,7 +64,6 @@ Runtime/
 .~lock*
 files/
 /backend_bak/
-/build/
 /phpMyAdmin/
 /ThinkPHP/
 /tp1/

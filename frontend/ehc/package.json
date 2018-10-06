@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "proxy":"http://192.168.0.112",
   "private": true,
-  "homepage": "http://192.168.0.10/build",
+  "homepage": "http://ehcpf.yi.org/frontend",
   "dependencies": {
     "antd": "^3.5.1",
     "antd-mobile": "^2.1.8",
