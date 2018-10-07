@@ -140,4 +140,26 @@ SELECT concat(au.level) as count FROM usertree as ut, adminuser as au where ut.u
     颜色风格
     * 注意都放入 本地存储 比如密码。
 
-10.5日 待修改
+10.7日 待修改
+
+验证码颜色：Tp image.class.php  386行
+
+    图形验证码，功能后台。
+验证码点击更换。
+
+后台的链接 改为传统链接。
+
+后台所有的文字标签，修改正确。
+写一个cron.php 用于发放奖励。
+
+
+
+后台测试报告：(已测)
+
+矿机类型
+总量管理
+添加矿机
+    添加成功，父子关系建立成功
+
+矿机列表
+    以及前台认证流程 OK

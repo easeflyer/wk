@@ -36,7 +36,7 @@ return array(
 
 /* URL设置 */
 'URL_CASE_INSENSITIVE'  => true,   //大小写： 默认false 表示URL区分大小写 true则表示不区分大小写
-'URL_MODEL'             => 1,   // rewrite 模式。
+'URL_MODEL'             => 0,   // rewrite 模式。
 //'URL_HTML_SUFFIX'       => 'html',  // URL伪静态后缀设置
 //'URL_PATHINFO_DEPR'     => '-',     // 参数链接 使用 - 符号。 seo 作用
 

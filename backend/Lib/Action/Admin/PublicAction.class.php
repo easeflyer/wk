@@ -43,7 +43,7 @@ class PublicAction extends Action {
 
             M('Adminuser')->where("id=$userinfo[id]")->save($data);
             RBAC::saveAccessList();  // 无参数 表示保存当前用户的 权限列表
-            $this->success('登录成功', U('Admin/admin'));
+            $this->success('登录成功', U('Admin/Admin/index'));
         } else {
             if ($_SESSION[C('USER_AUTH_KEY')]) {
                 $this->redirect('Admin/index');

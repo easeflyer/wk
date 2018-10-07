@@ -41,10 +41,11 @@ class UserAction extends Action
         $uid = $_SESSION['userid'];
         $post = $this->getPost();
         $model = M('realname');
-        if($model->where("id={$uid}")->save($post)){
+        if($model->where("user_id={$uid}")->save($post)){
             $re = array("state"=>'success','msg'=>'提交成功！','data'=>'');
             echo json_encode($re);
         }else{
+            //$_SESSION['test1']=$model->getLastSql();
             $re = array("state"=>'error','msg'=>'提交失败！','data'=>'');
             echo json_encode($re);
         }
