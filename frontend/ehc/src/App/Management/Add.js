@@ -115,7 +115,7 @@ class ManagementAddForm extends React.Component {
     //这里应该把电话号码发送至后台，触发短信,若手机号为空则不能发送
 
     if (formData.tel) {
-      const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms";
+      const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms&mobile=" + formData.tel;
       getData(url, this.sendsmsCallback, { tel: formData.tel });
       var t = 60;
       this.setState({              //把倒计时放入state的timer,以便在其他函数清除

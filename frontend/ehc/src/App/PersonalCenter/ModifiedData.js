@@ -59,7 +59,7 @@ class ModifiedDataForm extends React.Component {
     console.log(this.state.tel)
 
     // if (this.state.tel) {
-    const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms";
+    const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms&mobile=" + this.state.tel;
     getData(url, this.sendsmsCallback, { tel: this.state.tel });
     var t = 60;
     this.setState({              //把倒计时放入state的timer,以便在其他函数清除

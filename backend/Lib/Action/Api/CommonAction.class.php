@@ -5,9 +5,33 @@ class CommonAction extends Action{
      * 短信接口
      * fetch 调用本网址即可。
      */
+
     function sendsms(){
+        $mobile = $_GET['mobile'];
+        sendCheckCode($mobile);
+    }
+
+
+    function sendsms1(){
+        // http://apih.106i.cn:8086/smssend/singleSend?user=8008001427&apikey=201810076165&mobile=15081880198&content=0909
+        // apih.106i.cn:8086/smssend/batchSend?username=8008001427&apikey=201810076165&mobile=15081880198&encode=UTF-8&content=090909123
+        //$apiUrl = "http://apih.106i.cn:8086/smssend/singleSend";
+        $apiUrl = "http://apih.106i.cn:8086/smssend/batchSend";
+        $username = "8008001427";
+        $apikey = "201810076165";
+        $mobile = "15081880198";
+        $mobile = "13393317358";
+
+
+
         $code = rand(1000,9999);
-        $code = 9999;
+        //$code = 9999;
+        $code = "安全验证码:" . urlencode($code) . "，请不要发送给任何其他人。";
+
+        $url = $apiUrl . "?username={$username}&apikey={$apikey}&mobile={$mobile}&content={$code}";
+        $re = file_get_contents($url,false);
+
+        print_r($re);exit;
         //$re = curl('http://短信接口');
         $re = 1;
         if($re){
