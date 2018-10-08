@@ -11,7 +11,7 @@ class CommonAction extends Action{
         sendCheckCode($mobile);
     }
 
-
+    // 弃用。
     function sendsms1(){
         // http://apih.106i.cn:8086/smssend/singleSend?user=8008001427&apikey=201810076165&mobile=15081880198&content=0909
         // apih.106i.cn:8086/smssend/batchSend?username=8008001427&apikey=201810076165&mobile=15081880198&encode=UTF-8&content=090909123

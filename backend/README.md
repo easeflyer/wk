@@ -148,9 +148,9 @@ SELECT concat(au.level) as count FROM usertree as ut, adminuser as au where ut.u
     验证码点击更换。
 
     后台的链接 改为传统链接。
-
-后台所有的文字标签，修改正确。
+    后台所有的文字标签，修改正确。
 写一个cron.php 用于发放奖励。
+logo 改一下，app 图标改一下。
 
 
 
