@@ -68,7 +68,7 @@ class PublicAction extends Action {
         $this->display();
     }
 
-    public function daylyOutput()
+    static public function daylyOutput()
     {
 
         if($_GET['key']!=="ehcist.com0909") return false;
