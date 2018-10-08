@@ -39,11 +39,23 @@ class LoginForm extends React.Component {
       hidden: !this.state.hidden,
     })
   }
-
-  //需要调整后台访问
-  changepic = obj => {
-    obj.src = obj.src + '&nocache=' + Math.random();
+  /**
+   * 验证码切换
+   */
+  imgRef = (img) =>{
+    if(img){  // 这里 为什么要判断 img ？？？
+      img.onclick = function(){
+        this.src = this.src + '&nocache=' + Math.random();
+      }
+    }
   }
+
+
+  // //需要调整后台访问
+  // changepic = obj => {
+  //   alert(obj.src);
+  //   obj.src = obj.src + '&nocache=' + Math.random();
+  // }
   render() {
     const { getFieldProps } = this.props.form;
     return (
@@ -88,10 +100,15 @@ class LoginForm extends React.Component {
                 </InputItem>
               </div>
               <div className='codeImg'>
+                {/* <img src={HOST + '/backend/index.php?g=admin&m=Public&a=verify'}
+                  alt='' style={{ width: '100%' }}
+                  onClick={()=>this.changepic(this)}
+                /> */}
                 <img src={HOST + '/backend/index.php?g=admin&m=Public&a=verify'}
                   alt='' style={{ width: '100%' }}
-                  onClick={this.changepic(this)}
+                  ref = {this.imgRef}
                 />
+
               </div>
             </div>
             <div className='login-submit'>

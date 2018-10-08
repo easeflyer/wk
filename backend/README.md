@@ -140,14 +140,14 @@ SELECT concat(au.level) as count FROM usertree as ut, adminuser as au where ut.u
     颜色风格
     * 注意都放入 本地存储 比如密码。
 
-10.7日 待修改
+# 10.7日 待修改
 
-验证码颜色：Tp image.class.php  386行
+    验证码颜色：Tp image.class.php  386行
 
     图形验证码，功能后台。
-验证码点击更换。
+    验证码点击更换。
 
-后台的链接 改为传统链接。
+    后台的链接 改为传统链接。
 
 后台所有的文字标签，修改正确。
 写一个cron.php 用于发放奖励。

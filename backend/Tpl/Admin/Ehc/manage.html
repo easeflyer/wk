@@ -19,7 +19,7 @@
 
 
         function confirmdel(_id) {
-            $.messager.confirm('确认删除', '是否确认删除该级别', function (r) {
+            $.messager.confirm('确认删除', '是否确认删除？', function (r) {
                 if (r) {
                     window.location.href = 'index.php?g=admin&m=Ehc&a=userdel&id=' + _id;
                 }
@@ -30,7 +30,7 @@
 
 <body>
     <div class="easyui-panel" data-options="
-             title:'用户级别管理',
+             title:'矿机列表',
              border:false,
              iconCls:'icon-vcard'
              ">

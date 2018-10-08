@@ -327,9 +327,11 @@ class UserAction extends Action
         //$post = $this->getPost();
         $username = $post[username];
         $pwd = $post[pwd];
-        // if (md5($code) != $_SESSION[verify]) {
-        //     return;
-        // }
+        if (md5($post[code]) != $_SESSION[verify]) {
+            $re = array("state"=>'error','msg'=>'验证码错误！','data'=>'');
+            echo json_encode($re);
+            return;
+        }
         import("ORG.Util.RBAC");
         $where = "username='$username'";
         // 这里就是实例化了 当前登陆的用户。 返回用户的信息。不管是否存在。
