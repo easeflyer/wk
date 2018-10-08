@@ -1,6 +1,7 @@
 export function getData(url,callback,json=''){
     fetch(url, {
         method: 'POST', 
+        credentials: "include", // 带上 cookie
         body: JSON.stringify(json),
         headers: new Headers({
             'Content-Type': 'application/json'
