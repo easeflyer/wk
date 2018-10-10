@@ -158,6 +158,8 @@ SELECT concat(au.level) as count FROM usertree as ut, adminuser as au where ut.u
     不能给不存在的人转账。
 logo 改一下，app 图标改一下。
     前台开通矿机显示的价格不对。
+后台更新支付密码失败。
+显示一下用户的 es1 等级
 
 
 
