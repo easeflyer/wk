@@ -151,7 +151,7 @@ class CertificationForm extends React.Component {
               {this.state.realnameState === '2' ? '(未通过)' : null}
             </label>
             <Upload
-              withCredentials="true"
+              withCredentials={true}
               name="file"
               listType="picture-card"
               className="avatar-uploader"
