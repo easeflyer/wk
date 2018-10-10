@@ -33,7 +33,20 @@ class UserAction extends Action
             echo json_encode($re);
         }
     }
-
+    // 保存身份证号 
+    function idSave(){
+        $uid = $_SESSION['userid'];
+        $post = $this->getPost();
+        $model = M('realname');
+        if($model->where("user_id={$uid}")->save($post)){
+            $re = array("state"=>'success','msg'=>'身份证号已记录！','data'=>'');
+            echo json_encode($re);
+        }else{
+            //$_SESSION['test1']=$model->getLastSql();
+            $re = array("state"=>'error','msg'=>'身份证号记录失败！','data'=>'');
+            echo json_encode($re);
+        }
+    }
     /**
      * 修改实名认证状态
      */
@@ -41,12 +54,13 @@ class UserAction extends Action
         $uid = $_SESSION['userid'];
         $post = $this->getPost();
         $model = M('realname');
-        if($model->where("user_id={$uid}")->save($post)){
-            $re = array("state"=>'success','msg'=>'提交成功！','data'=>'');
+        if( $post['realname'] && $post['idnumber'] &&
+            $model->where("user_id={$uid}")->save($post)){
+            $re = array("state"=>'success','msg'=>'提交成功！','data'=>$post);
             echo json_encode($re);
         }else{
             //$_SESSION['test1']=$model->getLastSql();
-            $re = array("state"=>'error','msg'=>'提交失败！','data'=>'');
+            $re = array("state"=>'error','msg'=>'提交失败！','data'=>$post);
             echo json_encode($re);
         }
     }

@@ -23,6 +23,12 @@ class AccountAction extends Action
         $data1 = $model->find($uid);
         $data2 = $model->where("username='{$post['touser']}'")->find();
 
+        if(!$data2){
+            $re = array("state"=>'error','msg'=>'用户不存在！','data'=>'');
+            echo json_encode($re);
+            return;
+        }
+
         if($_SESSION['smscode']<$post['smscode']){
             $re = array("state"=>'error','msg'=>'短信验证码错误！','data'=>'');
             echo json_encode($re);
@@ -45,9 +51,9 @@ class AccountAction extends Action
         $model->startTrans();
         try{
             $data1['amount'] -= $post['amount'];
-            $model->save($data1);
+            if(!$model->save($data1)) throw new Exception('记账失败code:01！');
             $data2['amount'] += $post['amount'];
-            $model->save($data2);
+            if(!$model->save($data2)) throw new Exception('转账失败code:02！');
             $data = array(
                 'type'=>'0',
                 'amount'=>$post['amount'],

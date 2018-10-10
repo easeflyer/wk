@@ -23,10 +23,11 @@ class ManagementAddForm extends React.Component {
   componentWillMount() {
     //获取矿机总共有几种类型和对应的价格，是否从后台请求数据？
     const pricedata = [
-      { type: 2, title: '二类矿机', price: 2000 },
-      { type: 3, title: '三类矿机', price: 3000 },
-      { type: 4, title: '四类矿机', price: 4000 },
-      { type: 5, title: '五类矿机', price: 5000 },
+      { type: 1, title: '一类矿机', price: 800 },
+      { type: 2, title: '二类矿机', price: 3000 },
+      { type: 3, title: '三类矿机', price: 5000 },
+      { type: 4, title: '四类矿机', price: 10000 },
+      { type: 5, title: '五类矿机', price: 50000 },
     ]
     const username = session.get_name();
     console.log('username', username)

@@ -39,8 +39,8 @@ function sendsms($mobile, $content)
     $content = urlencode($content);
     //$apiUrl = "http://apih.106i.cn:8086/smssend/singleSend";
     $apiUrl = "http://apih.106i.cn:8086/smssend/batchSend";
-    $username = "8008001427";
-    $apikey = "201810076165";
+    $username = "8008001430";
+    $apikey = "201810095956";
     $url = $apiUrl . "?username={$username}&apikey={$apikey}&mobile={$mobile}&content={$content}";
     return file_get_contents($url, false);
 }
