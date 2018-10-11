@@ -53,7 +53,7 @@ class CommonAction extends Action{
         $sql = "select r.idnumber 
                 from adminuser as a, realname as r 
                 where r.user_id=a.id and a.id={$uid}";
-        $idnumber = $model->query($sql)[0]['idnumber'];
+        //$idnumber = $model->query($sql)[0]['idnumber'];
         if(!$idnumber) return false; // 如果没有身份证号，直接退出。
         // header('Access-Control-Allow-Origin:*');
         // header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");        

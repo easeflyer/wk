@@ -174,15 +174,15 @@ class AdminuserModel extends RelationModel
         //print("lstr:".$lstr."<br />");
         if( $level==0 && 
             $lstr < "1" && 
-            $data['amount']>99999) return 1;
+            $data['amount']>9999) return 1;
         // 1 => 2
         if( $level==1 && 
             $lstr > "0" && $lstr < "11" &&
-            $data['amount']>99999) return 2;
+            $data['amount']>9999) return 2;
         // 2 => 3
         if( $level==2 && 
             $lstr >= "11" && $lstr < "111" &&
-            $data['amount']>99999) return 3;
+            $data['amount']>9999) return 3;
         // if( $level==3 && 
         //     $subSum = 2 && 
         //     $data['amount']>99999) return 3;
