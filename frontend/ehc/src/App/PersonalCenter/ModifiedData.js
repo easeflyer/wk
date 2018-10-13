@@ -3,7 +3,6 @@ import React from 'react';
 import { createForm } from 'rc-form';
 import { InputItem, Button, Toast } from 'antd-mobile';
 
-import session from '../Utils/session';
 import { getData } from '../Utils/Reqiest';
 const config = require('../../config.js');
 const HOST = config.HOST
@@ -16,7 +15,8 @@ class ModifiedDataForm extends React.Component {
   }
 
   componentWillMount() {
-    const usermsg = JSON.parse(session.get_usermsg());
+    // const usermsg = JSON.parse(session.get_usermsg());
+    const usermsg = JSON.parse(this.props.usermsg);
     this.setState({
       ...usermsg
     })
@@ -55,8 +55,8 @@ class ModifiedDataForm extends React.Component {
     }
   }
   getCode = () => {
-    console.log('获取关联矿机验证码！', this.state.tel)
-    console.log(this.state.tel)
+    // console.log('获取关联矿机验证码！', this.state.tel)
+    // console.log(this.state.tel)
 
     // if (this.state.tel) {
     const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms&mobile=" + this.state.tel;

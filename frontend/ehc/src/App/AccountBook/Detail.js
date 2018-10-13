@@ -14,7 +14,7 @@ export default class AccountBookDetail extends React.Component {
     getData(url, this.callback);
   }
   callback = (res) => {
-    console.log('账号明细', res)
+    // console.log('账号明细', res)
     const data = res ?
       res.map((element, index) => {
         return <tr key={index}>
@@ -33,7 +33,7 @@ export default class AccountBookDetail extends React.Component {
 
   render() {
     return (<div>
-      <Navbar title='账号明细' />
+      <Navbar title='账号明细' usermsg={this.props.usermsg} />
       <header className='larry-personal-tit' >
         <span className='rowBorder'>账号明细</span>
       </header>

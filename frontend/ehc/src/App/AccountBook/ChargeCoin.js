@@ -24,7 +24,7 @@ class ChargeCoinForm extends React.Component {
     }
 
     return (<div>
-      <Navbar title='充币' />
+      <Navbar title='充币' usermsg={this.props.usermsg} />
       <header className='larry-personal-tit' >
         <span className='rowBorder'>充币</span>
       </header>

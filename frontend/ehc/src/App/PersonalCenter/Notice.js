@@ -16,7 +16,7 @@ export default class Notice extends React.Component {
     getData(url, this.callback);
   }
   callback = (res) => {
-    console.log('通知公告', res)
+    // console.log('通知公告', res)
     const data = res ?
       res.map((element, index) => {
         return <tr key={index}>
@@ -40,7 +40,7 @@ export default class Notice extends React.Component {
   }
   render() {
     return (<div>
-      <Navbar title='通知公告' />
+      <Navbar title='通知公告' usermsg={this.props.usermsg} />
       <header className='larry-personal-tit' >
         <span className='rowBorder'>通知公告</span>
       </header>

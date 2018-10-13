@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { TabBar, Toast } from 'antd-mobile';
+import { TabBar } from 'antd-mobile';
 
 import Survey from './App/Survey/Index';
 
@@ -15,9 +15,6 @@ import PickingCoin from './App/AccountBook/PickingCoin';
 import MyProfile from './App/PersonalCenter/MyProfile';
 import Notice from './App/PersonalCenter/Notice';
 import session from './App/Utils/session';
-import { getData } from './App/Utils/Reqiest';
-const config = require('./config');
-const HOST = config.HOST;
 
 export default class TabBarExample extends React.Component {
   constructor(props) {
@@ -28,25 +25,6 @@ export default class TabBarExample extends React.Component {
       hidden: false,
       fullScreen: true,  // 是否全屏显示
     };
-  }
-
-  componentWillMount() {
-    //获取用户资料，保存到localStorage
-    const url = HOST + "/backend/index.php?g=Api&m=User&a=profile";
-    getData(url, this.callback);
-  }
-
-  callback = (res) => {
-    console.log('获取用户资料！', res);
-    // const realName = res.Realname;
-    // const amount = res.amount;
-    // console.log(realName)
-    if (res.state === 'success') {
-      
-      session.set_usermsg(JSON.stringify(res.data));
-    } else { 
-      Toast.info('获取用户资料失败！')
-    }
   }
 
   loginout = () => {
@@ -64,31 +42,43 @@ export default class TabBarExample extends React.Component {
     let page = null;
     switch (this.state.selectedTab) {
       case 'Survey':
-        page = <Survey />
+        page = <Survey
+          usermsg={this.props.usermsg} />
         break;
       case 'ManagementAdd':
-        page = <ManagementAdd menuCLick={this.menuCLick} />
+        page = <ManagementAdd
+          usermsg={this.props.usermsg}
+          menuCLick={this.menuCLick} />
         break;
       case 'ManagementRelate':
-        page = <ManagementRelate menuCLick={this.menuCLick} />
+        page = <ManagementRelate
+          usermsg={this.props.usermsg}
+          menuCLick={this.menuCLick} />
         break;
       case 'AccountBookDetail':
-        page = <AccountBookDetail />
+        page = <AccountBookDetail
+          usermsg={this.props.usermsg} />
         break;
       case 'CommunityTrade':
-        page = <CommunityTrade menuCLick={this.menuCLick} />
+        page = <CommunityTrade
+          usermsg={this.props.usermsg}
+          menuCLick={this.menuCLick} />
         break;
       case 'ChargeCoin':
-        page = <ChargeCoin />
+        page = <ChargeCoin
+          usermsg={this.props.usermsg} />
         break;
       case 'PickingCoin':
-        page = <PickingCoin />
+        page = <PickingCoin
+          usermsg={this.props.usermsg} />
         break;
       case 'MyProfile':
-        page = <MyProfile />
+        page = <MyProfile
+          usermsg={this.props.usermsg} />
         break;
       case 'Notice':
-        page = <Notice />
+        page = <Notice
+          usermsg={this.props.usermsg} />
         break;
       default:
         break;

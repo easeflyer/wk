@@ -16,13 +16,13 @@ class PickingCoinForm extends React.Component {
     const { getFieldProps } = this.props.form;
 
     return (<div>
-      <Navbar title='提币' />
+      <Navbar title='提币' usermsg={this.props.usermsg} />
       <header className='larry-personal-tit' >
         <span className='rowBorder'>提币</span>
       </header>
       <div className='layui-form'>
         <form className="flex-container">
-          
+
           <div className='layui-form-item'>
             <div className='layui-input-block'>
               <InputItem
@@ -78,7 +78,7 @@ class PickingCoinForm extends React.Component {
                 onClick={this.onSubmit}>确认提交</Button>
             </div>
           </div>
-          <p style={{color:'red',textAlign:'center'}}>
+          <p style={{ color: 'red', textAlign: 'center' }}>
             <span>提现手续费5%，若手续费小于50EHC，则按照50EHC收取</span>
           </p>
         </form>

@@ -17,32 +17,47 @@ class App extends React.Component {
     this.state = {
       islogin: false,
     };
-    if (session.get_sid()) {
-      this.state.islogin = true
-    }
   }
+
   componentWillMount() {
+    this.cklogin();
+  }
+
+  //检查登录状态
+  cklogin = () => {
     const json = { sid: session.get_sid() };
     const url = HOST + "/backend/index.php?g=Api&m=User&a=cklogin";
-    getData(url, this.callback, json)
+    getData(url, this.ckloginCallback, json)
   }
-  callback = (res) => {
+  ckloginCallback = (res) => {
     // console.log(res)
-    if (res.state !== 'success') {
+    if (res.state === 'success') {
+      this.getUsermsg();
+    } else {
+      this.setState({
+        islogin: false,
+      })
       Toast.info(res.msg);
     }
-    // if (res.state === 'success') {
-    //   this.setState({
-    //     islogin: true,
-    //   })
-
-    // } else {
-    //   this.setState({
-    //     islogin: false,
-    //   })
-    //   Toast.info(res.msg);
-    // }
   }
+
+  //获取用户信息
+  getUsermsg = () => {
+    const url = HOST + "/backend/index.php?g=Api&m=User&a=profile";
+    getData(url, this.getUsermsgCallback);
+  }
+  getUsermsgCallback = (res) => {
+    if (res.state === 'success') {
+      this.setState({
+        usermsg: JSON.stringify(res.data),
+        islogin: true,
+      })
+    } else {
+      Toast.info('获取用户资料失败！')
+    }
+  }
+
+
   toggleLoginState = (index) => {
     this.setState({
       islogin: index,
@@ -52,9 +67,10 @@ class App extends React.Component {
     return <div>
       {this.state.islogin ?
         <TabBarExample
+          usermsg={this.state.usermsg}
           toggleLoginState={this.toggleLoginState} /> :
         <LoginPage
-          toggleLoginState={this.toggleLoginState} />}
+          getUsermsg={this.getUsermsg} />}
     </div>
   }
 }

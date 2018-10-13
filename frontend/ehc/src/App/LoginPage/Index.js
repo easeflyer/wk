@@ -13,17 +13,17 @@ class LoginForm extends React.Component {
     hidden: true,       //切换语言按钮的隐藏状态
   }
   callback = (res) => {
-    console.log('用户登录', res)
+    // console.log('用户登录', res)
     if (res.state === 'success') {
       session.set_sid(res.data.sid);
       session.set_name(res.data.username);
-      this.props.toggleLoginState(true);
+      this.props.getUsermsg();
     }
     Toast.info(res.msg);
   }
   onSubmit = () => {
     var formData = this.props.form.getFieldsValue();  //表单数据
-    console.log('1231321', formData);
+    // console.log('1231321', formData);
     if (!formData.code) {
       Toast.info('验证码不能为空！');
       return;
@@ -42,9 +42,9 @@ class LoginForm extends React.Component {
   /**
    * 验证码切换
    */
-  imgRef = (img) =>{
-    if(img){  // 这里 为什么要判断 img ？？？
-      img.onclick = function(){
+  imgRef = (img) => {
+    if (img) {  // 这里 为什么要判断 img ？？？
+      img.onclick = function () {
         this.src = this.src + '&nocache=' + Math.random();
       }
     }
@@ -106,7 +106,7 @@ class LoginForm extends React.Component {
                 /> */}
                 <img src={HOST + '/backend/index.php?g=admin&m=Public&a=verify'}
                   alt='' style={{ width: '100%' }}
-                  ref = {this.imgRef}
+                  ref={this.imgRef}
                 />
 
               </div>
