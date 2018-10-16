@@ -30,7 +30,7 @@ class ManagementAddForm extends React.Component {
       { type: 5, title: '五类矿机', price: 50000 },
     ]
     const username = session.get_name();
-    console.log('username', username)
+    // console.log('username', username)
     this.setState({
       username: username,
       pricedata: pricedata,
@@ -55,7 +55,7 @@ class ManagementAddForm extends React.Component {
   }
 
   callback = (res) => {
-    console.log('添加矿机', res)
+    // console.log('添加矿机', res)
     //完成后跳转到首页
     if (res.state === 'success') {
       this.props.menuCLick('Survey');
@@ -112,7 +112,7 @@ class ManagementAddForm extends React.Component {
 
   getCode = () => {
     var formData = this.props.form.getFieldsValue();
-    console.log('获取短信验证码手机号：', formData.tel)
+    // console.log('获取短信验证码手机号：', formData.tel)
     //这里应该把电话号码发送至后台，触发短信,若手机号为空则不能发送
 
     if (formData.tel) {
@@ -153,7 +153,7 @@ class ManagementAddForm extends React.Component {
     })
 
     return (<div>
-      <Navbar title='新增矿机' />
+      <Navbar title='新增矿机' usermsg={this.props.usermsg} />
       <header className='larry-personal-tit' >
         <span className='rowBorder'>新增矿机</span>
       </header>

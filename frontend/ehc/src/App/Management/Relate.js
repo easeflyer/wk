@@ -27,7 +27,7 @@ export default class ManagementRelate extends React.Component {
   }
 
   getDataCallback = (res) => {
-    console.log(res)
+    // console.log(res)
     if (res) {
       this.setState({
         data: res,
@@ -42,7 +42,7 @@ export default class ManagementRelate extends React.Component {
     const none = { display: 'none' };
     const block = { display: 'block' };
 
-    console.log(this.state.data)
+    // console.log(this.state.data)
     const boxDiv = this.state.data ?
       this.state.data.map((element, index) => {
         return <div className='col-lg-6' key={index}>
@@ -73,7 +73,7 @@ export default class ManagementRelate extends React.Component {
       }) : null
 
     return (<div>
-      <Navbar title='关联矿机' />
+      <Navbar title='关联矿机' usermsg={this.props.usermsg} />
       <header className='larry-personal-tit' >
         <span className='rowBorder'>关联矿机</span>
       </header>
@@ -145,8 +145,8 @@ class AddForm extends React.Component {
     }
   }
   getCode = () => {
-    console.log('获取关联矿机验证码！', this.state.tel)
-    console.log(this.state.tel)
+    // console.log('获取关联矿机验证码！', this.state.tel)
+    // console.log(this.state.tel)
 
     // if (this.state.tel) {
     const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms&mobile=" + this.state.tel;
@@ -170,7 +170,7 @@ class AddForm extends React.Component {
   }
 
   callback = (res) => {
-    console.log(res)
+    // console.log(res)
     // if (res.state === 'success') {
     // TODO: 状态码的判断需要再确认
     this.props.togglehidden(true);
