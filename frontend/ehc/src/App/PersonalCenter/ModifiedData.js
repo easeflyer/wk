@@ -14,13 +14,13 @@ class ModifiedDataForm extends React.Component {
     timer: null,       //倒计时
   }
 
-  componentWillMount() {
-    // const usermsg = JSON.parse(session.get_usermsg());
-    const usermsg = JSON.parse(this.props.usermsg);
-    this.setState({
-      ...usermsg
-    })
-  }
+  // componentWillMount() {
+  //   // const usermsg = JSON.parse(session.get_usermsg());
+  //   const usermsg = this.props.usermsg;
+  //   this.setState({
+  //     ...usermsg
+  //   })
+  // }
 
   componentWillUnmount() {
     //组件从DOM中移除时清除倒计时进程
@@ -79,6 +79,7 @@ class ModifiedDataForm extends React.Component {
     // }
   }
   render() {
+    const usermsg = this.props.usermsg;
     const { getFieldProps } = this.props.form;
 
     return (<div>
@@ -94,7 +95,8 @@ class ModifiedDataForm extends React.Component {
                 {...getFieldProps('username')}
                 clear
                 type="text"
-                value={this.state.username}
+                value={usermsg.username}
+                // value={this.state.username}
                 disabled
               >
               </InputItem>
@@ -108,7 +110,8 @@ class ModifiedDataForm extends React.Component {
                 clear
                 type="text"
                 // TODO: 矿机名，不知道哪个字段，需要确认修改
-                value={this.state.type}
+                value={usermsg.type}
+                // value={this.state.type}
                 disabled
               >
               </InputItem>
@@ -121,7 +124,8 @@ class ModifiedDataForm extends React.Component {
                 {...getFieldProps('tel')}
                 clear
                 type="text"
-                value={this.state.tel}
+                value={usermsg.tel}
+                // value={this.state.tel}
                 disabled
               >
               </InputItem>
@@ -158,7 +162,8 @@ class ModifiedDataForm extends React.Component {
                 {...getFieldProps('email')}
                 clear
                 type="text"
-                value={this.state.email}
+                value={usermsg.email}
+                // value={this.state.email}
                 disabled
               >
               </InputItem>
@@ -175,7 +180,8 @@ class ModifiedDataForm extends React.Component {
               >
               </InputItem>
               <Button className='msgbtn1'
-                value={this.state.msg}
+                value={usermsg.msg}
+                // value={this.state.msg}
                 onClick={this.getCode}
                 disabled={this.state.msg === "获取验证码" ? false : true}
               >

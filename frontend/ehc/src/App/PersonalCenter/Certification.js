@@ -1,5 +1,5 @@
 import React from 'react';
-import { createForm } from 'rc-form';
+// import { createForm } from 'rc-form';
 import { InputItem, Button } from 'antd-mobile';
 import { Upload, Icon, message } from 'antd';
 import { getData } from '../Utils/Reqiest';
@@ -37,7 +37,7 @@ class CertificationForm extends React.Component {
 
   componentWillMount() {
     // const usermsg = JSON.parse(session.get_usermsg());
-    const usermsg = JSON.parse(this.props.usermsg);
+    const usermsg = this.props.usermsg;
     //TODO:  1代表待审核，3代表通过，都应该把图片显示出来，需要确认一下图片地址是否正确
     if (usermsg.Realname.state === '1'    // 待审核
       || usermsg.Realname.state === '3') { // 已认证
@@ -81,11 +81,10 @@ class CertificationForm extends React.Component {
     }
   }
 
-  toggleState = () => {
-    var formData = this.props.form.getFieldsValue();  //表单数据
-    //TODO: 发送数据到后台改变状态，这个接口需要补全
+  toggleRealnameState = () => {
     const url = HOST + '/backend/index.php?g=Api&m=User&a=changeRnState';
-    const json = { state: '1', realname: formData.realname, idnumber: formData.idnumber }
+    // const json = { state: '1', realname: formData.realname, idnumber: formData.idnumber }
+    const json = { state: '1', realname: this.state.username, idnumber: this.state.idnumber }
     getData(url, this.callback, json);
   }
   callback = (res) => {
@@ -98,8 +97,19 @@ class CertificationForm extends React.Component {
     }
   }
 
+
+  usernameChange = (event) => {
+    this.setState({
+      username: event,
+    })
+  }
+  idnumberChange = (event) => {
+    this.setState({
+      idnumber: event,
+    })
+  }
   render() {
-    const { getFieldProps } = this.props.form;
+    // const { getFieldProps } = this.props.form;
     const UploadButton = ({ name }) => (
       <div>
         <Icon type={this.state.loading ? 'loading' : 'plus'} />
@@ -119,11 +129,12 @@ class CertificationForm extends React.Component {
 
             <div className='layui-input-block'>
               <InputItem
-                {...getFieldProps('realname')}
+                // {...getFieldProps('realname')}
                 clear
                 placeholder="真实姓名"
                 type="text"
                 defaultValue={this.state.username}
+                onChange={this.usernameChange}
                 editable={("02".indexOf(this.state.realnameState) === -1) ? false : true}
               >
               </InputItem>
@@ -132,11 +143,12 @@ class CertificationForm extends React.Component {
           <div className='layui-form-item'>
             <div className='layui-input-block'>
               <InputItem
-                {...getFieldProps('idnumber')}
+                // {...getFieldProps('idnumber')}
                 clear
                 placeholder="身份证号"
                 type="text"
                 defaultValue={this.state.idnumber}
+                onChange={this.idnumberChange}
                 onBlur={this.idSave}
                 editable={("02".indexOf(this.state.realnameState) === -1) ? false : true}
               >
@@ -228,7 +240,7 @@ class CertificationForm extends React.Component {
                 ? { display: 'block' } : { display: 'none' }}>
             <div className='layui-input-block'>
               <Button className='msgbtn1' style={{ marginLeft: '30%' }}
-                onClick={this.toggleState}>提交图片信息</Button>
+                onClick={this.toggleRealnameState}>提交图片信息</Button>
             </div>
           </div>
         </form>
@@ -237,5 +249,6 @@ class CertificationForm extends React.Component {
   }
 }
 
-const Certification = createForm()(CertificationForm);
-export default Certification;
+// const Certification = createForm()(CertificationForm);
+// export default Certification;
+export default CertificationForm;

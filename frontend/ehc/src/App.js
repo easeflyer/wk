@@ -17,10 +17,16 @@ class App extends React.Component {
     this.state = {
       islogin: false,
     };
+    if (session.get_sid()) {
+      this.state.islogin = true
+    }
   }
 
   componentWillMount() {
     this.cklogin();
+    this.setState({
+      usermsg: JSON.parse(session.get_usermsg()),
+    })
   }
 
   //检查登录状态
@@ -31,9 +37,7 @@ class App extends React.Component {
   }
   ckloginCallback = (res) => {
     // console.log(res)
-    if (res.state === 'success') {
-      this.getUsermsg();
-    } else {
+    if (res.state !== 'success') {
       this.setState({
         islogin: false,
       })
@@ -48,8 +52,12 @@ class App extends React.Component {
   }
   getUsermsgCallback = (res) => {
     if (res.state === 'success') {
+      const usermsg = res.data;
+      delete usermsg.pwd;
+      delete usermsg.cpwd;
+      session.set_usermsg(JSON.stringify(usermsg));
       this.setState({
-        usermsg: JSON.stringify(res.data),
+        usermsg: usermsg,
         islogin: true,
       })
     } else {
@@ -58,9 +66,10 @@ class App extends React.Component {
   }
 
 
-  toggleLoginState = (index) => {
+  loginout = (index) => {
+    session.destroy();
     this.setState({
-      islogin: index,
+      islogin: false,
     })
   }
   render() {
@@ -68,7 +77,7 @@ class App extends React.Component {
       {this.state.islogin ?
         <TabBarExample
           usermsg={this.state.usermsg}
-          toggleLoginState={this.toggleLoginState} /> :
+          loginout={this.loginout} /> :
         <LoginPage
           getUsermsg={this.getUsermsg} />}
     </div>

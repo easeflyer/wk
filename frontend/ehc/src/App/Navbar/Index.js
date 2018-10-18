@@ -2,21 +2,13 @@ import React from 'react';
 import './Navbar.css';
 
 class Navbar extends React.Component {
-  state = {
-    usermsg: null,
-  }
-  componentWillMount() {
-    const usermsg = JSON.parse(this.props.usermsg);
-    this.setState({
-      usermsg: usermsg,
-    })
-  }
 
   render() {
     const ln = ['Es0', 'Es1', 'Es2', 'Es3', 'Cs1', 'Cs2', 'Cs3', 'Os1', 'Os2', 'Os3',];
-    const username = this.state.usermsg.username;
-    const amount = this.state.usermsg.amount;
-    const level = this.state.usermsg.level;
+    const usermsg = this.props.usermsg;
+    const username = usermsg.username;
+    const amount = usermsg.amount;
+    const level = usermsg.level;
     return (
       <div className='headers'>
         <div className='lf'>

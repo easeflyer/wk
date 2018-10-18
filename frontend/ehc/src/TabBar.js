@@ -14,7 +14,6 @@ import PickingCoin from './App/AccountBook/PickingCoin';
 
 import MyProfile from './App/PersonalCenter/MyProfile';
 import Notice from './App/PersonalCenter/Notice';
-import session from './App/Utils/session';
 
 export default class TabBarExample extends React.Component {
   constructor(props) {
@@ -27,10 +26,6 @@ export default class TabBarExample extends React.Component {
     };
   }
 
-  loginout = () => {
-    session.destroy();
-    this.props.toggleLoginState(false);
-  }
   menuCLick = (tab) => {
     this.setState({
       menu: 0,
@@ -140,7 +135,7 @@ export default class TabBarExample extends React.Component {
             onClick={() => this.menuCLick('Notice')}>
             通知公告</div>
           <div className='navbtn'
-            onClick={() => this.loginout()}>
+            onClick={() => this.props.loginout()}>
             退出登陆</div>
           <div className='tiggle'></div>
           <div className='innertiggle'></div>
