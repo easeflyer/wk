@@ -57,26 +57,26 @@ class ModifiedDataForm extends React.Component {
   getCode = () => {
     // console.log('获取关联矿机验证码！', this.state.tel)
     // console.log(this.state.tel)
-
-    // if (this.state.tel) {
-    const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms&mobile=" + this.state.tel;
-    getData(url, this.sendsmsCallback, { tel: this.state.tel });
-    var t = 60;
-    this.setState({              //把倒计时放入state的timer,以便在其他函数清除
-      timer: setInterval(() => {
-        if (t === 0) {
-          this.setState({ msg: '获取验证码' })
-          t = 60;
-          clearInterval(this.state.timer);
-        } else {
-          this.setState({ msg: "重发(" + t + ")" })
-          t--;
-        }
-      }, 1000)
-    })
-    // } else {
-    //   Toast.fail('手机号有误！');
-    // }
+    const usermsg = this.props.usermsg;
+    if (usermsg.tel) {
+      const url = HOST + "/backend/index.php?g=Api&m=Common&a=sendsms&mobile=" + usermsg.tel;
+      getData(url, this.sendsmsCallback, { tel: usermsg.tel });
+      var t = 60;
+      this.setState({              //把倒计时放入state的timer,以便在其他函数清除
+        timer: setInterval(() => {
+          if (t === 0) {
+            this.setState({ msg: '获取验证码' })
+            t = 60;
+            clearInterval(this.state.timer);
+          } else {
+            this.setState({ msg: "重发(" + t + ")" })
+            t--;
+          }
+        }, 1000)
+      })
+    } else {
+      Toast.fail('手机号有误！');
+    }
   }
   render() {
     const usermsg = this.props.usermsg;

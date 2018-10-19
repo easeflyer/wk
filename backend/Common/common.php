@@ -11,9 +11,9 @@ function sendCheckCode($mobile)
 {
     $code = rand(1000, 9999);
     $code = "安全验证码:" . urlencode($code) . "，请不要发送给任何其他人。";
-    //$re = sendsms($mobile, $code);
-    $code = '9999';
-    $re = "success:234234234";
+    $re = sendsms($mobile, $code);
+    //$code = '9999';
+    //$re = "success:234234234";
 
     $arrRe =explode(':',$re);
     $re = $arrRe[0];

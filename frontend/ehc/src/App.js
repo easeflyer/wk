@@ -52,6 +52,7 @@ class App extends React.Component {
   }
   getUsermsgCallback = (res) => {
     if (res.state === 'success') {
+      console.log('res.data',res.data)
       const usermsg = res.data;
       delete usermsg.pwd;
       delete usermsg.cpwd;
