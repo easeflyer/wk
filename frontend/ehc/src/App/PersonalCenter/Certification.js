@@ -151,7 +151,7 @@ class CertificationForm extends React.Component {
                 type="text"
                 defaultValue={this.state.idnumber}
                 onChange={this.idnumberChange}
-                onBlur={this.idSave}
+                onBlur={("02".indexOf(this.state.realnameState) === -1) ? null : this.idSave}
                 editable={("02".indexOf(this.state.realnameState) === -1) ? false : true}
               >
               </InputItem>

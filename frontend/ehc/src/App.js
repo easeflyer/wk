@@ -27,7 +27,7 @@ class App extends React.Component {
     this.setState({
       usermsg: JSON.parse(session.get_usermsg()),
     });
-    this.getUsermsg();
+    // this.getUsermsg();
   }
 
   //检查登录状态
@@ -38,12 +38,22 @@ class App extends React.Component {
   }
   ckloginCallback = (res) => {
     // console.log(res)
-    if (res.state !== 'success') {
+    if (res.state === 'success') {
+      this.getUsermsg();
+    } else {
       this.setState({
         islogin: false,
       })
       Toast.info(res.msg);
     }
+    // if (res.state !== 'success') {
+    //   this.setState({
+    //     islogin: false,
+    //   })
+    //   Toast.info(res.msg);
+    // }else{
+    // this.getUsermsg();
+    // }
   }
 
   //获取用户信息
