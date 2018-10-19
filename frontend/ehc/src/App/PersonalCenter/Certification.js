@@ -62,6 +62,7 @@ class CertificationForm extends React.Component {
     getData(url, function (data) {
       // console.log('idsave:',data);
     }, json);
+    // this.props.getUsermsg();
     // console.log('val:',val);
   }
 
@@ -95,6 +96,7 @@ class CertificationForm extends React.Component {
         realnameState: '1',  // 待审核
       })
     }
+    this.props.getUsermsg();
   }
 
 

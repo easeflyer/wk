@@ -69,6 +69,7 @@ export default class TabBarExample extends React.Component {
         break;
       case 'MyProfile':
         page = <MyProfile
+          getUsermsg={this.props.getUsermsg}
           usermsg={this.props.usermsg} />
         break;
       case 'Notice':

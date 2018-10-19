@@ -26,7 +26,8 @@ class App extends React.Component {
     this.cklogin();
     this.setState({
       usermsg: JSON.parse(session.get_usermsg()),
-    })
+    });
+    this.getUsermsg();
   }
 
   //检查登录状态
@@ -52,7 +53,7 @@ class App extends React.Component {
   }
   getUsermsgCallback = (res) => {
     if (res.state === 'success') {
-      console.log('res.data',res.data)
+      console.log('res.data', res.data)
       const usermsg = res.data;
       delete usermsg.pwd;
       delete usermsg.cpwd;
@@ -78,6 +79,7 @@ class App extends React.Component {
       {this.state.islogin ?
         <TabBarExample
           usermsg={this.state.usermsg}
+          getUsermsg={this.getUsermsg}
           loginout={this.loginout} /> :
         <LoginPage
           getUsermsg={this.getUsermsg} />}

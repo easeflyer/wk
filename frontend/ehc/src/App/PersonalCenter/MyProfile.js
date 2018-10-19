@@ -9,7 +9,8 @@ export default class MyProfile extends React.Component {
       <Navbar title='新增矿机' usermsg={this.props.usermsg} />
 
       <ModifiedData usermsg={this.props.usermsg} />
-      <Certification usermsg={this.props.usermsg} />
+      <Certification usermsg={this.props.usermsg}
+        getUsermsg={this.props.getUsermsg} />
     </div>)
   }
 }
