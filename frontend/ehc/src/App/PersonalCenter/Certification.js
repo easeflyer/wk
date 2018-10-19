@@ -62,7 +62,7 @@ class CertificationForm extends React.Component {
     getData(url, function (data) {
       // console.log('idsave:',data);
     }, json);
-    // this.props.getUsermsg();
+    this.props.getUsermsg();
     // console.log('val:',val);
   }
 
