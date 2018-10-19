@@ -33,12 +33,14 @@ function sendCheckCode($mobile)
 
 /**
  * username,apikey 用客户自己的。
+ * http://apih.106i.cn:8086/smssend/batchSend?username=8008001430&apikey=201810095956&mobile=15081880198&content=checkcode2348
  */
 function sendsms($mobile, $content)
 {
     $content = urlencode($content);
     //$apiUrl = "http://apih.106i.cn:8086/smssend/singleSend";
-    $apiUrl = "http://apih.106i.cn:8086/smssend/batchSend";
+    //$apiUrl = "http://apih.106i.cn:8086/smssend/batchSend"; // 批量高效 8086端口
+    $apiUrl = "http://hx.106i.cn/smssend/"; // 80 端口 单条。
     $username = "8008001430";
     $apikey = "201810095956";
     $url = $apiUrl . "?username={$username}&apikey={$apikey}&mobile={$mobile}&content={$content}";
